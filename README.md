@@ -327,3 +327,10 @@ python prover/evaluate.py --data-path data/leandojo_benchmark_4/random/  --ckpt_
 
 * For general questions and discussions, please use [GitHub Discussions](https://github.com/lean-dojo/ReProver/discussions).  
 * To report a potential bug, please open an issue.
+
+## Some Notes on deepspeed
+```
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+export CPATH=/usr/local/cuda/include:$CPATH
+```
