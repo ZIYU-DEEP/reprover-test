@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0,2,3 python generator/main.py fit --config generator/confs/cli_lean4_random.yaml  
