@@ -3,6 +3,7 @@ lightning_logs/
 
 ckpt/
 bash/
+leandojo-pl-ckpts/
 
 
 # Byte-compiled / optimized / DLL files
