@@ -334,3 +334,11 @@ export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export CPATH=/usr/local/cuda/include:$CPATH
 ```
+
+
+## Some Local Things
+```
+export TMPDIR=/localscratch/hsun409/tmp
+export RAY_BACKEND_CONFIG='{"file_system_monitor_config":{"high_usage_threshold_percentage":99,"low_usage_threshold_percentage":95,"usage_check_period_ms":500}}'
+export RAY_SYSTEM_CONFIG='{"file_system_monitor_config":{"high_usage_threshold_percentage":99,"low_usage_threshold_percentage":95,"usage_check_period_ms":500}}'
+```
