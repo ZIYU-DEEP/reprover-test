@@ -8,6 +8,7 @@ import tempfile
 import networkx as nx
 from loguru import logger
 from lean_dojo import Pos
+from datetime import datetime
 import pytorch_lightning as pl
 from dataclasses import dataclass, field
 from pytorch_lightning.utilities.deepspeed import (
@@ -485,17 +486,42 @@ def zip_strict(*args):
     return zip(*args)
 
 
+# def set_logger(verbose: bool) -> None:
+#     """
+#     Set the logging level of loguru.
+#     The effect of this function is global, and it should
+#     be called only once in the main function
+#     """
+#     logger.remove()
+#     if verbose:
+#         logger.add(sys.stderr, level="DEBUG")
+#     else:
+#         logger.add(sys.stderr, level="INFO")
+
+
 def set_logger(verbose: bool) -> None:
     """
-    Set the logging level of loguru.
-    The effect of this function is global, and it should
-    be called only once in the main function
+    Set the logging level of loguru and save logs to a dynamically named file within the 'logs' directory,
+    based on the current datetime.
+    The effect of this function is global, and it should be called only once in the main function.
+    
+    Parameters:
+        verbose (bool): If True, set logging level to DEBUG, otherwise set to INFO.
     """
-    logger.remove()
-    if verbose:
-        logger.add(sys.stderr, level="DEBUG")
-    else:
-        logger.add(sys.stderr, level="INFO")
+    # Create the path to save the log
+    os.makedirs('./logs', exist_ok=True)
+    time_now = datetime.now().strftime('%m-%d-%H-%M')
+    log_path = f'./logs/{time_now}.log'
+
+    # Remove existing handlers
+    logger.remove() 
+
+    # Set logging level based on verbose flag
+    level = "DEBUG" if verbose else "INFO"
+    logger.add(sys.stderr, level=level)
+
+    # Add a file handler with the appropriate logging level
+    logger.add(log_path, level=level, backtrace=True, diagnose=True)
 
 
 def cpu_checkpointing_enabled(pl_module) -> bool:
