@@ -148,7 +148,8 @@ def evaluate(
     # Save the results.
     if exp_id is None:
         exp_id = str(uuid.uuid4())
-    pickle_path = f"{exp_id}_results.pickle"
+    os.makedirs("./results", exist_ok=True)
+    pickle_path = f"./results/{exp_id}_results.pickle"
     pickle.dump(results, open(pickle_path, "wb"))
     logger.info(f"Results saved to {pickle_path}")
 
