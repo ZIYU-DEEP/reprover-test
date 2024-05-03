@@ -106,6 +106,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         self.max_inp_seq_len = max_inp_seq_len
         self.max_oup_seq_len = max_oup_seq_len
 
+        # Loading retriever or not
         if ret_ckpt_path is None:
             logger.info("Without retrieval")
             self.retriever = None
@@ -115,9 +116,11 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
                 ret_ckpt_path, self.device, freeze=True
             )
 
+        # Set the T5 model and the generator
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.generator = T5ForConditionalGeneration.from_pretrained(model_name)
-
+        
+        # Record the accuracy computation
         self.topk_accuracies = dict()
         for k in range(1, num_beams + 1):
             acc = TopkAccuracy(k)
@@ -147,10 +150,11 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     ############
 
     def training_step(self, batch, batch_idx: int):
+        # Calling the forward method
         loss = self(
-            batch["state_ids"],
-            batch["state_mask"],
-            batch["tactic_ids"],
+            batch["state_ids"],   # input
+            batch["state_mask"],  # mask (i.e., ignoring padding tokens)
+            batch["tactic_ids"],  # output
         )
         self.log(
             "loss_train",
@@ -174,12 +178,19 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         state_ids: torch.LongTensor,
         tactic_ids: torch.LongTensor,
     ) -> None:
+        # Get the tensorboard logger
         tb = self.logger.experiment
+        
+        # Get the first input in the batch as an example
         inp = self.tokenizer.decode(state_ids[0], skip_special_tokens=True)
+        
+        # Get the first output in the batch as an example
         oup_ids = torch.where(
             tactic_ids[0] == -100, self.tokenizer.pad_token_id, tactic_ids[0]
         )
         oup = self.tokenizer.decode(oup_ids, skip_special_tokens=True)
+        
+        # Log the example input state and tactic
         tb.add_text(f"{split}_state", f"```\n{inp}\n```", self.global_step)
         tb.add_text(f"{split}_tactic", f"`{oup}`", self.global_step)
 
@@ -197,10 +208,12 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     ##############
 
     def validation_step(self, batch: Dict[str, Any], _) -> None:
+        # Get the ids and the masks
         state_ids = batch["state_ids"]
         state_mask = batch["state_mask"]
         tactic_ids = batch["tactic_ids"]
-
+        
+        # Get the loss
         loss = self(state_ids, state_mask, tactic_ids)
         self.log(f"loss_val", loss, on_step=False, on_epoch=True, sync_dist=True)
         self._log_io_texts("val", state_ids, tactic_ids)
@@ -296,7 +309,11 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         num_samples: int,
     ) -> List[Tuple[str, float]]:
         return self.batch_generate(
-            [state], [file_path], [theorem_full_name], [theorem_pos], num_samples
+            state=[state], 
+            file_path=[file_path], 
+            theorem_full_name=[theorem_full_name], 
+            theorem_pos=[theorem_pos], 
+            num_samples=num_samples
         )[0]
 
     def batch_generate(
@@ -321,6 +338,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
                 for s, premises in zip_strict(state, retrieved_premises)
             ]
 
+        # Tokenize the state
         tokenized_state = self.tokenizer(
             state,
             padding="longest",
@@ -490,7 +508,11 @@ class GPT4TacticGenerator(TacticGenerator):
         num_samples: int,
     ) -> List[List[Tuple[str, float]]]:
         return [
-            self.generate(s, f, t, p, num_samples)
+            self.generate(state=s, 
+                          file_path=f, 
+                          theorem_full_name=t, 
+                          theorem_pos=p, 
+                          num_samples=num_samples)
             for s, f, t, p in zip_strict(
                 state, file_path, theorem_full_name, theorem_pos
             )
