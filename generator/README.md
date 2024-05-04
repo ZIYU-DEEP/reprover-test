@@ -87,7 +87,19 @@ With the batch collate function, the batch will look like:
 ```
 In the `module.py`, the loss will be directly computed using `loss = self(batch["state_ids", "state_mask", "tactic_ids"])`.
 
-We already have a byT5 model trained on that, and we want to finetune the model 
+We already have a byT5 model trained on that, and we want to finetune the model. For simplicity we will be using the same keys, but adding some post-processing.
+
+For **next-goal prediction**: 
+`[CURRENT GOAL]{state_before}[NEXT GOAL]{state_after}`
+- `input`: We attach `[CURRENT GOAL]\n` as the prefix and `\n[TARGET GOAL]\n` as a suffix to the original input of `format_state(tac["state_before"])`, for it to get distinguished from the default proof step prediction in the original model.
+- `output`: We use `format_state(tac["state_after"])` as the output.
+
+For **goal-conditioned tactic prediction**: 
+`[CURRENT GOAL]{state_before}[TARGET GOAL]{state_after}[PROOFSTEP]{tactic}`
+- `input`:  We attach `[CURRENT GOAL]\n` as the prefix and add `\n[TARGET GOAL]\n{format_state(tac["state_after"])}[PROOFSTEP]` as the suffix to the original input of `format_state(tac["state_before"])`.
+- `output`: We use the `tactic` as the output.
+
+We may need to modify the `evaluate.py` for the model to extract states correctly.
 
 ### Key Components
 
