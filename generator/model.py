@@ -214,7 +214,9 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         tactic_ids = batch["tactic_ids"]
         
         # Get the loss
-        loss = self(state_ids, state_mask, tactic_ids)
+        loss = self(state_ids, 
+                    state_mask, 
+                    tactic_ids)
         self.log(f"loss_val", loss, on_step=False, on_epoch=True, sync_dist=True)
         self._log_io_texts("val", state_ids, tactic_ids)
 

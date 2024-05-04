@@ -50,20 +50,23 @@ class GeneratorDataset(Dataset):
         data = []
         for thm in tqdm(json.load(open(data_path))):
             for tac in thm["traced_tactics"]:
+                # Get the string tactic
                 if "annotated_tactic" in tac:
                     tactic = format_tactic(*tac["annotated_tactic"], normalize_tactics)
                 else:
                     tactic = format_tactic(tac["tactic"], [], normalize_tactics)
                 if not self.keep_marks:
                     tactic = remove_marks(tactic)
+                
+                # Get the data
                 data.append(
                     {
                         "url": thm["url"],
                         "commit": thm["commit"],
                         "file_path": thm["file_path"],
                         "full_name": thm["full_name"],
-                        "state": format_state(tac["state_before"]),
-                        "tactic": tactic,
+                        "state": format_state(tac["state_before"]),  # Current state
+                        "tactic": tactic,                            # Tactic to apply
                     }
                 )
 
@@ -76,6 +79,7 @@ class GeneratorDataset(Dataset):
     def __getitem__(self, idx: int) -> Example:
         ex = self.data[idx]
 
+        # Augment the state with the premises
         if self.preds is not None:
             file_path = ex["file_path"]
             pred = self.preds[(file_path, ex["full_name"], ex["state"])]
@@ -92,6 +96,11 @@ class GeneratorDataset(Dataset):
         return ex
 
     def collate(self, examples: List[Example]) -> Batch:
+        """
+        Grouping multiple examples in a single batch.
+        Each key in the dictionary corresponds to a list of examples.
+        """
+        # Tokenize states
         state = [ex["state"] for ex in examples]
         tokenized_state = self.tokenizer(
             state,
@@ -100,6 +109,8 @@ class GeneratorDataset(Dataset):
             truncation=True,
             return_tensors="pt",
         )
+        
+        # Tokenize tactics
         tactic = [ex["tactic"] for ex in examples]
         tokenized_tactic = self.tokenizer(
             tactic,
@@ -109,12 +120,14 @@ class GeneratorDataset(Dataset):
             return_tensors="pt",
         )
         tactic_ids = tokenized_tactic.input_ids
-        tactic_ids[tactic_ids == self.tokenizer.pad_token_id] = -100
+        tactic_ids[tactic_ids == self.tokenizer.pad_token_id] = -100  # Let the loss to ignore
 
+        
         batch = {}
         batch["state"] = state
         batch["state_ids"] = tokenized_state.input_ids
         batch["state_mask"] = tokenized_state.attention_mask
+        
         batch["tactic"] = tactic
         batch["tactic_ids"] = tactic_ids
         batch["tactic_mask"] = tokenized_tactic.attention_mask
