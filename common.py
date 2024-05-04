@@ -524,6 +524,7 @@ def set_logger(verbose: bool) -> None:
     logger.add(log_path, level=level, backtrace=True, diagnose=True)
 
 
+
 def cpu_checkpointing_enabled(pl_module) -> bool:
     try:
         trainer = pl_module.trainer
