@@ -141,6 +141,7 @@ The `model.py` file contains the implementation of a PyTorch Lightning module na
     - **`configure_optimizers`:** Set the optimizer with learning rate and warmup steps.
     - **`validation_step`:** Similar to `training_step`, but also includes generation of tactics using beam search to evaluate the model during validation.
     - **`generate` and `batch_generate`:** Methods for generating tactics based on input state; `generate` handles single instances, while `batch_generate` is designed for batch processing.
+    - **load**: Loading the model checkpoint.
 
 ### Utilities
 

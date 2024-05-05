@@ -129,8 +129,12 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
 
     @classmethod
     def load(
-        cls, ckpt_path: str, device, freeze: bool
+        cls, 
+        ckpt_path: str, 
+        device, 
+        freeze: bool
     ) -> "RetrievalAugmentedGenerator":
+        logger.info(f'Loading checkpoint from {ckpt_path}.')
         return load_checkpoint(cls, ckpt_path, device, freeze)
 
     def forward(
