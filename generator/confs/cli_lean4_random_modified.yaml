@@ -10,7 +10,7 @@ trainer:
       offload_optimizer: false
       cpu_checkpointing: false
   gradient_clip_val: 1.0
-  max_steps: 500000  # num_epoch is (max_steps * num_batches) / batch_size = 200
+  max_steps: 500000  # num_epoch is (max_steps * num_batches) / batch_size 
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
   callbacks:
@@ -31,7 +31,7 @@ trainer:
         mode: max
         verbose: true
 
-# By default, the model will be saved at `lightning_logs`
+# By default, the model will be saved at `./lightning_logs/`
 model:
   model_name: google/byt5-small
   lr: 5e-4
