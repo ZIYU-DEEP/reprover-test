@@ -1,74 +1,52 @@
-"""Script for training the tactic generator."""
-
+from pytorch_lightning.cli import LightningCLI
 import os
 from loguru import logger
-from pytorch_lightning.cli import LightningCLI
-
-from generator.datamodule import GeneratorDataModule
 from generator.model import RetrievalAugmentedGenerator
+from generator.datamodule import GeneratorDataModule
 
-
-# class CLI(LightningCLI):
-    # def add_arguments_to_parser(self, parser) -> None:
-    #     parser.link_arguments("model.model_name", "data.model_name")
-    #     parser.link_arguments("data.max_inp_seq_len", "model.max_inp_seq_len")
-    #     parser.link_arguments("data.max_oup_seq_len", "model.max_oup_seq_len")
-
-class CLI(LightningCLI):
+class CustomCLI(LightningCLI):
     def add_arguments_to_parser(self, parser):
-        # Base setting
         super().add_arguments_to_parser(parser)
-        parser.add_argument("--checkpoint_path", type=str, default=None, 
-                            help="Path to the checkpoint file from which to load the model.")
-        # Ensure the parser recognizes 'checkpoint_path' as a valid configuration key
-        parser.set_defaults({
-            'checkpoint_path': None  # Setting a default value that LightningCLI can recognize
-        })
         
-        # Linking arguments from model to data
+        # New arguments
+        parser.add_argument("--init_ckpt_path", type=str, default=None,
+                            help="Path to the checkpoint file to init the model.")
+        
+        # Linking arguments
         parser.link_arguments("model.model_name", "data.model_name")
         parser.link_arguments("data.max_inp_seq_len", "model.max_inp_seq_len")
         parser.link_arguments("data.max_oup_seq_len", "model.max_oup_seq_len")
 
-    def before_instantiate_classes(self):
-        super().before_instantiate_classes()
-        # Use the custom load method if a checkpoint path is provided
-        checkpoint_path = self.config.get('checkpoint_path')
-        seed_everything = self.config.get('seed_everything')
-        
-        if seed_everything: logger.info('Using seed!')
-        else: logger.info('No seed!')
-        
-        if checkpoint_path:
-            logger.info(f"Loading model from checkpoint: {checkpoint_path}")
-            
+    def before_fit(self):
+        # Logging the config
+        logger.info(f'Config: {self.config}')
+        init_ckpt_path = self.config.fit.init_ckpt_path
+
+        if init_ckpt_path:
             # Set the device
-            devices = self.config['trainer']['devices']
-            device = f'cuda:{devices[0]}' if isinstance(devices, list) else 'cuda' if devices > 0 else 'cpu'
-            
-            # Load the model from checkpoint
-            model = RetrievalAugmentedGenerator.load(
-                ckpt_path=checkpoint_path,
+            device = self.config.fit.trainer.devices
+            if isinstance(device, list): device = f'cuda:{device[0]}' 
+            elif device: device = 'cuda'
+            else: device = 'cpu' 
+
+            # Load the weights
+            self.model = RetrievalAugmentedGenerator.load(
+                ckpt_path=init_ckpt_path,
                 device=device,
-                freeze=False,
+                freeze=False
             )
-            self.config_init['model'] = model
-            logger.info(f"Model successfully loaded from {checkpoint_path}")
-            if hasattr(model, 'summary'):
-                model.summary()
+            logger.info(f"Model loaded from checkpoint: {init_ckpt_path}")
         else:
-            logger.info("No checkpoint path provided; initializing model from scratch.")
+            logger.info("No checkpoint provided; starting training from scratch.")
 
 
-def main() -> None:
-    # Start
-    logger.info(f"PID: {os.getpid()}")
-    logger.info("Starting the training process.")
-    cli = CLI(RetrievalAugmentedGenerator, GeneratorDataModule)
-    
-    # Set the config
-    logger.info("Configuration: \n", cli.config)
-    logger.info("Configuration loaded and CLI setup is complete.")
+def main():
+    logger.info(f"PID: {os.getpid()}.")
+    logger.info(f"Starting the training process.")
+    cli = CustomCLI(model_class=RetrievalAugmentedGenerator, 
+                    datamodule_class=GeneratorDataModule,
+                    run=True)
+    logger.info(f"Configuration loaded and CLI setup is complete.")
 
 
 if __name__ == "__main__":
