@@ -1,5 +1,8 @@
-CUDA_VISIBLE_DEVICES=3 python generator/main.py fit --config generator/confs/cli_lean4_random_modified.yaml  
-python generator/main.py fit --config generator/confs/cli_lean4_random_modified.yaml  
+python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_modified.yaml
+
+python generator/main_new.py fit \
+    --config generator/confs/cli_lean4_random_modified.yaml  
 
 python prover/evaluate.py \
     --data-path data/leandojo_benchmark_4/random/ \
