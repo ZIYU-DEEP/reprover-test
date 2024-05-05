@@ -367,9 +367,10 @@ def format_tactic(annot_tac: str, provenances, normalize: bool) -> str:
     """Use full names for the all <a>...</a>."""
     if normalize:
         annot_tac = normalize_spaces(annot_tac)
-    if len(provenances) == 0:
+    if len(provenances) == 0:  # If no meta-data, return it as it is
         return annot_tac
 
+    # Find all occurrence within in <a></a> tag
     tac = ""
     marks = list(re.finditer(r"<a>(?P<ident>.+?)</a>", annot_tac))
 
@@ -377,6 +378,7 @@ def format_tactic(annot_tac: str, provenances, normalize: bool) -> str:
         last_end = marks[i - 1].end() if i > 0 else 0
         tac += annot_tac[last_end : m.start()] + "<a>" + prov["full_name"] + "</a>"
 
+    # Replace the original short name with full 
     tac += annot_tac[marks[-1].end() :]
     return tac
 
