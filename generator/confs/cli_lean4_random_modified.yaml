@@ -1,3 +1,5 @@
+# Add the checkpoint path
+checkpoint_path: leandojo-pl-ckpts/generator_random.ckpt
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
 trainer:
   accelerator: gpu
@@ -56,3 +58,5 @@ data:
   p_drop: 0.5
   normalize_tactics: true
   num_workers: 2
+
+
