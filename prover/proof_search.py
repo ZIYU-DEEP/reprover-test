@@ -210,7 +210,7 @@ class BestFirstSearchProver:
             path = self.theorem.repo.get_packages_dir() / self.theorem.repo.name / path
 
         suggestions = self.tac_gen.generate(
-            state=ts,
+            inputs=ts,  # TODO: NEED TO MODIFY THIS TO ADAP DIFFERENT INPUT PATTERNS
             file_path=path,
             theorem_full_name=self.theorem.full_name,
             theorem_pos=self.posision,
@@ -318,7 +318,9 @@ class CpuProver(BestFirstSearchProver):
             tac_gen = FixedTacticGenerator(tactic, module)
         else:
             tac_gen = RetrievalAugmentedGenerator.load(
-                ckpt_path, device=torch.device("cpu"), freeze=True
+                ckpt_path=ckpt_path, 
+                device=torch.device("cpu"), 
+                freeze=True
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -350,7 +352,9 @@ class GpuProver(BestFirstSearchProver):
             tac_gen = FixedTacticGenerator(tactic, module)
         else:
             tac_gen = RetrievalAugmentedGenerator.load(
-                ckpt_path, device=torch.device("cuda"), freeze=True
+                ckpt_path=ckpt_path, 
+                device=torch.device("cuda"), 
+                freeze=True
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -391,17 +395,24 @@ class DistributedProver:
 
         if not self.distributed:
             if ckpt_path is None:
-                tac_gen = FixedTacticGenerator(tactic, module)
+                tac_gen = FixedTacticGenerator(
+                    tactic=tactic, 
+                    module=module)
             else:
                 device = torch.device("cuda") if num_gpus > 0 else torch.device("cpu")
                 tac_gen = RetrievalAugmentedGenerator.load(
-                    ckpt_path, device=device, freeze=True
+                    ckpt_path=ckpt_path, 
+                    device=device, 
+                    freeze=True
                 )
                 if tac_gen.retriever is not None:
                     assert indexed_corpus_path is not None
                     tac_gen.retriever.load_corpus(indexed_corpus_path)
             self.prover = BestFirstSearchProver(
-                tac_gen, timeout, num_sampled_tactics, debug
+                tac_gen=tac_gen, 
+                timeout=timeout, 
+                num_sampled_tactics=num_sampled_tactics, 
+                debug=debug
             )
             return
 

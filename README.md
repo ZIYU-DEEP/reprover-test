@@ -328,24 +328,33 @@ python prover/evaluate.py --data-path data/leandojo_benchmark_4/random/  --ckpt_
 * For general questions and discussions, please use [GitHub Discussions](https://github.com/lean-dojo/ReProver/discussions).  
 * To report a potential bug, please open an issue.
 
-## Some Notes on deepspeed
+## Other Setups
+### Notes on deepspeed
 ```
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export CPATH=/usr/local/cuda/include:$CPATH
 ```
 
-## Some Local Things
+### Some Local Things
 ```
 export TMPDIR=/localscratch/hsun409/tmp
-export RAY_BACKEND_CONFIG='{"file_system_monitor_config":{"high_usage_threshold_percentage":99,"low_usage_threshold_percentage":95,"usage_check_period_ms":500}}'
-export RAY_SYSTEM_CONFIG='{"file_system_monitor_config":{"high_usage_threshold_percentage":99,"low_usage_threshold_percentage":95,"usage_check_period_ms":500}}'
 ```
 
-## Checkpoints
+### Checkpoints
 ```
 git lfs install
 git clone https://huggingface.co/kaiyuy/leandojo-pl-ckpts.git
 cd leandojo-pl-ckpts
 git lfs fetch --all
 ```
+
+### TODO
+- [ ] Check if current version works (we change input ids)
+- [ ] Modification on the `model.py`
+    - [ ] Add `gen_type` to the generator
+    - [ ] When `gen_type` is goal generation, we shouldn't do tactic eval.
+- [ ] Modification on the `datamodule.py`
+    - [ ] Modify the `collate` function to adapt to different `gen_type`
+- [ ] Modification on the `evaluate.py`
+- [ ] Modification on the `search_tree.py`
