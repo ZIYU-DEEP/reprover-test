@@ -114,11 +114,11 @@ def evaluate(
 
     # Search for proofs using multiple concurrent provers.
     prover = DistributedProver(
-        ckpt_path,
-        indexed_corpus_path,
-        tactic,
-        module,
-        num_workers,
+        ckpt_path=ckpt_path,
+        indexed_corpus_path=indexed_corpus_path,
+        tactic=tactic,
+        module=module,
+        num_workers=num_workers,
         num_gpus=num_gpus,
         timeout=timeout,
         num_sampled_tactics=num_sampled_tactics,

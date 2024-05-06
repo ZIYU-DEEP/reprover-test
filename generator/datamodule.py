@@ -82,6 +82,8 @@ class GeneratorDataset(Dataset):
     def __getitem__(self, idx: int) -> Example:
         ex = self.data[idx]
 
+        # ---------------------------------------------------------------
+        # PREMISE-RELEVANT
         # Augment the state with the premises
         if self.preds is not None:
             file_path = ex["file_path"]
@@ -92,6 +94,7 @@ class GeneratorDataset(Dataset):
                 self.max_inp_seq_len,
                 self.p_drop if self.is_train else 0.0,
             )
+        # ---------------------------------------------------------------
 
         if not self.keep_marks:
             ex["state"] = remove_marks(ex["state"])
@@ -105,9 +108,9 @@ class GeneratorDataset(Dataset):
         Each key in the dictionary corresponds to a list of examples.
         """
         # Tokenize states
-        state = [ex["state"] for ex in examples]
+        inputs = [ex["state"] for ex in examples]
         tokenized_state = self.tokenizer(
-            state,
+            inputs,
             padding="longest",
             max_length=self.max_inp_seq_len,
             truncation=True,
@@ -115,26 +118,26 @@ class GeneratorDataset(Dataset):
         )
         
         # Tokenize tactics
-        tactic = [ex["tactic"] for ex in examples]
+        outputs = [ex["tactic"] for ex in examples]
         tokenized_tactic = self.tokenizer(
-            tactic,
+            outputs,
             padding="longest",
             max_length=self.max_oup_seq_len,
             truncation=True,
             return_tensors="pt",
         )
-        tactic_ids = tokenized_tactic.input_ids
-        tactic_ids[tactic_ids == self.tokenizer.pad_token_id] = -100  # Let the loss to ignore
+        output_ids = tokenized_tactic.input_ids
+        output_ids[output_ids == self.tokenizer.pad_token_id] = -100  # Let the loss to ignore
 
         
         batch = {}
-        batch["state"] = state
-        batch["state_ids"] = tokenized_state.input_ids
-        batch["state_mask"] = tokenized_state.attention_mask
+        batch["inputs"] = inputs
+        batch["input_ids"] = tokenized_state.input_ids
+        batch["input_mask"] = tokenized_state.attention_mask
         
-        batch["tactic"] = tactic
-        batch["tactic_ids"] = tactic_ids
-        batch["tactic_mask"] = tokenized_tactic.attention_mask
+        batch["outputs"] = outputs
+        batch["output_ids"] = output_ids
+        batch["output_mask"] = tokenized_tactic.attention_mask
 
         # Copy other fields.
         for k in examples[0].keys():
