@@ -194,38 +194,38 @@ class GeneratorDataModule(pl.LightningDataModule):
     def setup(self, stage: Optional[str] = None) -> None:
         if stage in (None, "fit"):
             self.ds_train = GeneratorDataset(
-                os.path.join(self.data_path, "train.json"),
-                self.corpus,
-                self.keep_marks,
-                self.preds,
-                self.max_inp_seq_len,
-                self.max_oup_seq_len,
-                self.p_drop,
-                self.normalize_tactics,
-                self.tokenizer,
+                data_path=os.path.join(self.data_path, "train.json"),
+                corpus=self.corpus,
+                keep_marks=self.keep_marks,
+                preds=self.preds,
+                max_inp_seq_len=self.max_inp_seq_len,
+                max_oup_seq_len=self.max_oup_seq_len,
+                p_drop=self.p_drop,
+                normalize_tactics=self.normalize_tactics,
+                tokenizer=self.tokenizer,
                 is_train=True,
                 task_type=self.task_type,
             )
 
         if stage in (None, "fit", "validate"):
             self.ds_val = GeneratorDataset(
-                os.path.join(self.data_path, "val.json"),
-                self.corpus,
-                self.keep_marks,
-                self.preds,
-                self.max_inp_seq_len,
-                self.max_oup_seq_len,
-                self.p_drop,
-                self.normalize_tactics,
-                self.tokenizer,
+                data_path=os.path.join(self.data_path, "val.json"),
+                corpus=self.corpus,
+                keep_marks=self.keep_marks,
+                preds=self.preds,
+                max_inp_seq_len=self.max_inp_seq_len,
+                max_oup_seq_len=self.max_oup_seq_len,
+                p_drop=self.p_drop,
+                normalize_tactics=self.normalize_tactics,
+                tokenizer=self.tokenizer,
                 is_train=False,
                 task_type=self.task_type,
             )
 
     def train_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.ds_train,
-            self.batch_size,
+            dataset=self.ds_train,
+            batch_size=self.batch_size,
             num_workers=self.num_workers,
             collate_fn=self.ds_train.collate,
             shuffle=True,
@@ -235,8 +235,8 @@ class GeneratorDataModule(pl.LightningDataModule):
 
     def val_dataloader(self) -> DataLoader:
         return DataLoader(
-            self.ds_val,
-            self.eval_batch_size,
+            dataset=self.ds_val,
+            batch_size=self.eval_batch_size,
             num_workers=self.num_workers,
             collate_fn=self.ds_val.collate,
             shuffle=False,
