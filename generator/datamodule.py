@@ -34,6 +34,7 @@ class GeneratorDataset(Dataset):
         normalize_tactics: bool,
         tokenizer: ByT5Tokenizer,
         is_train: bool,
+        task_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
         self.corpus = corpus
@@ -45,6 +46,7 @@ class GeneratorDataset(Dataset):
         self.tokenizer = tokenizer
         self.is_train = is_train
         self.data = self._load_data(data_path, normalize_tactics)
+        self.task_type = task_type
 
     def _load_data(self, data_path: str, normalize_tactics: bool) -> List[Example]:
         data = []
@@ -67,6 +69,7 @@ class GeneratorDataset(Dataset):
                         "full_name": thm["full_name"],
                         "state": format_state(tac["state_before"]),  # Current state
                         "tactic": tactic,                            # Tactic to apply
+                        "target_state": format_state(tac["state_after"]),  # Target state
                     }
                 )
 
@@ -92,6 +95,7 @@ class GeneratorDataset(Dataset):
 
         if not self.keep_marks:
             ex["state"] = remove_marks(ex["state"])
+            ex["target_state"] = remove_marks(ex["target_state"])
 
         return ex
 
@@ -155,6 +159,7 @@ class GeneratorDataModule(pl.LightningDataModule):
         num_workers: int,
         corpus_path: Optional[str] = None,
         preds_path: Optional[str] = None,
+        task_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
         self.data_path = data_path
@@ -171,6 +176,7 @@ class GeneratorDataModule(pl.LightningDataModule):
         self.normalize_tactics = normalize_tactics
         self.num_workers = num_workers
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.task_type = task_type
 
         if preds_path is None:
             logger.info("Without retrieval data")
@@ -198,6 +204,7 @@ class GeneratorDataModule(pl.LightningDataModule):
                 self.normalize_tactics,
                 self.tokenizer,
                 is_train=True,
+                task_type=self.task_type,
             )
 
         if stage in (None, "fit", "validate"):
@@ -212,6 +219,7 @@ class GeneratorDataModule(pl.LightningDataModule):
                 self.normalize_tactics,
                 self.tokenizer,
                 is_train=False,
+                task_type=self.task_type,
             )
 
     def train_dataloader(self) -> DataLoader:
