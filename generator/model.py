@@ -90,38 +90,6 @@ class TacticGenerator(ABC):
         raise NotImplementedError
 
 
-class GoalGenerator(ABC):
-    """
-    A goal generator takes a state and generates multiple target goal candidates.
-    
-    - goal_prediction:
-        - input: f'[CURRENT GOAL]\n{ex["state"]}\n[NEXT GOAL]\n'
-        - output: ex["target_state"]
-    """
-
-    @abstractmethod
-    def generate(
-        self,
-        inputs: str,
-        file_path: str,
-        theorem_full_name: str,
-        theorem_pos: Pos,
-        num_samples: int,
-    ) -> List[Tuple[str, float]]:
-        raise NotImplementedError
-
-    @abstractmethod
-    def batch_generate(
-        self,
-        inputs: List[str],
-        file_path: List[str],
-        theorem_full_name: List[str],
-        theorem_pos: List[Pos],
-        num_samples: int,
-    ) -> List[List[Tuple[str, float]]]:
-        raise NotImplementedError
-
-
 class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     def __init__(
         self,
@@ -137,6 +105,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         max_oup_seq_len: int,
         length_penalty: float = 0.0,
         ret_ckpt_path: Optional[str] = None,
+        gen_type: str = 'default',
     ) -> None:
         super().__init__()
         self.save_hyperparameters()
@@ -150,6 +119,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         self.eval_num_theorems = eval_num_theorems
         self.max_inp_seq_len = max_inp_seq_len
         self.max_oup_seq_len = max_oup_seq_len
+        self.gen_type = gen_type
 
         # ---------------------------------------------------------------
         # PREMISE-RELEVANT

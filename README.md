@@ -350,11 +350,13 @@ git lfs fetch --all
 ```
 
 ### TODO
-- [ ] Check if current version works (we change input ids)
+- [x] Check if current version works (we change input ids)
 - [ ] Modification on the `model.py`
     - [ ] Add `gen_type` to the generator
     - [ ] When `gen_type` is goal generation, we shouldn't do tactic eval.
 - [ ] Modification on the `datamodule.py`
     - [ ] Modify the `collate` function to adapt to different `gen_type`
+- [ ] We may need set a different max length for goal_driven_tactic_prediction
+    - The length may get doubled.
 - [ ] Modification on the `evaluate.py`
 - [ ] Modification on the `search_tree.py`

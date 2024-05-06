@@ -34,7 +34,7 @@ class GeneratorDataset(Dataset):
         normalize_tactics: bool,
         tokenizer: ByT5Tokenizer,
         is_train: bool,
-        task_type: str="default",  # Allow different patterns
+        gen_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
         self.corpus = corpus
@@ -46,7 +46,7 @@ class GeneratorDataset(Dataset):
         self.tokenizer = tokenizer
         self.is_train = is_train
         self.data = self._load_data(data_path, normalize_tactics)
-        self.task_type = task_type
+        self.gen_type = gen_type
 
     def _load_data(self, data_path: str, normalize_tactics: bool) -> List[Example]:
         data = []
@@ -107,9 +107,35 @@ class GeneratorDataset(Dataset):
         Grouping multiple examples in a single batch.
         Each key in the dictionary corresponds to a list of examples.
         """
-        # Tokenize states
-        inputs = [ex["state"] for ex in examples]
-        tokenized_state = self.tokenizer(
+        # -------------------------------------------------------
+        # Prepare inputs and outputs
+        inputs, outputs = [], []
+        
+        # Prepare inputs and outputs given the gen type
+        for ex in examples:
+            
+            if self.gen_type == "default":
+                input_text = ex["state"]
+                output_text = ex["tactic"]
+                
+            elif self.gen_type == "goal_prediction":
+                input_text = f"[CURRENT GOAL]\n{ex['state']}\n[NEXT GOAL]\n"
+                output_text = ex["target_state"]
+                
+            elif self.gen_type == "goal_driven_tactic_prediction":
+                input_text = f"[CURRENT GOAL]\n{ex['state']}\n[TARGET GOAL]\n{ex['target_state']}\n[PROOFSTEP]\n"
+                output_text = ex["tactic"]
+                
+            else:
+                raise ValueError("Unsupported generation type")
+            
+            inputs.append(input_text)
+            outputs.append(output_text)
+        # -------------------------------------------------------
+        
+        # -------------------------------------------------------
+        # Tokenize inputs
+        tokenized_inputs = self.tokenizer(
             inputs,
             padding="longest",
             max_length=self.max_inp_seq_len,
@@ -117,32 +143,36 @@ class GeneratorDataset(Dataset):
             return_tensors="pt",
         )
         
-        # Tokenize tactics
-        outputs = [ex["tactic"] for ex in examples]
-        tokenized_tactic = self.tokenizer(
+        # Tokenize outputs
+        tokenized_outputs = self.tokenizer(
             outputs,
             padding="longest",
             max_length=self.max_oup_seq_len,
             truncation=True,
             return_tensors="pt",
         )
-        output_ids = tokenized_tactic.input_ids
-        output_ids[output_ids == self.tokenizer.pad_token_id] = -100  # Let the loss to ignore
-
         
+        # Extra handling on output_ids
+        output_ids = tokenized_outputs.input_ids
+        output_ids[output_ids == self.tokenizer.pad_token_id] = -100  # Let the loss to ignore
+        # -------------------------------------------------------
+
+        # -------------------------------------------------------
+        # Creating the batch 
         batch = {}
         batch["inputs"] = inputs
-        batch["input_ids"] = tokenized_state.input_ids
-        batch["input_mask"] = tokenized_state.attention_mask
+        batch["input_ids"] = tokenized_inputs.input_ids
+        batch["input_mask"] = tokenized_inputs.attention_mask
         
         batch["outputs"] = outputs
         batch["output_ids"] = output_ids
-        batch["output_mask"] = tokenized_tactic.attention_mask
+        batch["output_mask"] = tokenized_outputs.attention_mask
 
         # Copy other fields.
         for k in examples[0].keys():
             if k not in batch:
                 batch[k] = [ex[k] for ex in examples]
+        # -------------------------------------------------------
 
         return batch
 
@@ -162,7 +192,7 @@ class GeneratorDataModule(pl.LightningDataModule):
         num_workers: int,
         corpus_path: Optional[str] = None,
         preds_path: Optional[str] = None,
-        task_type: str="default",  # Allow different patterns
+        gen_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
         self.data_path = data_path
@@ -179,7 +209,7 @@ class GeneratorDataModule(pl.LightningDataModule):
         self.normalize_tactics = normalize_tactics
         self.num_workers = num_workers
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.task_type = task_type
+        self.gen_type = gen_type
 
         if preds_path is None:
             logger.info("Without retrieval data")
@@ -207,7 +237,7 @@ class GeneratorDataModule(pl.LightningDataModule):
                 normalize_tactics=self.normalize_tactics,
                 tokenizer=self.tokenizer,
                 is_train=True,
-                task_type=self.task_type,
+                gen_type=self.gen_type,
             )
 
         if stage in (None, "fit", "validate"):
@@ -222,7 +252,7 @@ class GeneratorDataModule(pl.LightningDataModule):
                 normalize_tactics=self.normalize_tactics,
                 tokenizer=self.tokenizer,
                 is_train=False,
-                task_type=self.task_type,
+                gen_type=self.gen_type,
             )
 
     def train_dataloader(self) -> DataLoader:
