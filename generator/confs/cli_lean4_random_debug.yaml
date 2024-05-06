@@ -1,6 +1,7 @@
 # Add the checkpoint path
 init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
+
 trainer:
   accelerator: gpu
   devices: 1
@@ -45,6 +46,7 @@ model:
   eval_num_workers: 5  # Lower this number if you don't have 80GB GPU memory.
   eval_num_gpus: 1
   eval_num_theorems: 250  # Lower this number will make validation faster (but noiser).
+  gen_type: default
 
 data:
   data_path: data/leandojo_benchmark_4/random/
@@ -58,5 +60,6 @@ data:
   p_drop: 0.5
   normalize_tactics: true
   num_workers: 2
+  gen_type: default
 
 

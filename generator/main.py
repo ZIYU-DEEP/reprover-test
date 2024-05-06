@@ -8,9 +8,16 @@ class CustomCLI(LightningCLI):
     def add_arguments_to_parser(self, parser):
         super().add_arguments_to_parser(parser)
         
-        # New arguments
+        # New arguments to start with a ckpt
         parser.add_argument("--init_ckpt_path", type=str, default=None,
                             help="Path to the checkpoint file to init the model.")
+        
+        # New arguments on gen_type
+        # parser.add_argument("--model.gen_type", type=str, default="default",
+        #                     help="Type of generation task for the model: default, target-goal, or goal-conditioned")
+        # parser.add_argument("--data.gen_type", type=str, default="default",
+        #                     help="Type of generation task for the data module: default, target-goal, or goal-conditioned")
+        
         
         # Linking arguments
         parser.link_arguments("model.model_name", "data.model_name")
