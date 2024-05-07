@@ -45,21 +45,21 @@ model:
   eval_num_retrieved: 100
   eval_num_workers: 5  # Lower this number if you don't have 80GB GPU memory.
   eval_num_gpus: 1
-  eval_num_theorems: 250  # Lower this number will make validation faster (but noiser).
-  gen_type: goal
+  eval_num_theorems: 0  # Lower this number will make validation faster (but noiser).
+  gen_type: goal_driven_tactic
 
 data:
   data_path: data/leandojo_benchmark_4/random/
   corpus_path: data/leandojo_benchmark_4/corpus.jsonl
   keep_marks: true
   preds_path: null
-  batch_size: 4  # effective_batch_size == batch_size * accumulate_grad_batches * devices
+  batch_size: 4  # effective_batch_size == batch_size * accumulate_grad_batches * devices 
   eval_batch_size: 64
   max_inp_seq_len: 4600
   max_oup_seq_len: 512
   p_drop: 0.5
   normalize_tactics: true
   num_workers: 2
-  gen_type: goal
+  gen_type: goal_driven_tactic
 
 

@@ -369,3 +369,4 @@ git lfs fetch --all
 - Set evaluation for the bilevel approach
 - Adding smt! to current setting
 - Adding a mixed training approach
+- [ ] Adding training from checkpoint with the optimizer state correctly loaded
