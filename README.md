@@ -359,4 +359,5 @@ git lfs fetch --all
 - [ ] We may need set a different max length for goal_driven_tactic_prediction
     - The length may get doubled.
 - [ ] Modification on the `evaluate.py`
+    - We may still be able to evaluate goal_driven_tactic. simply set all the target state to be "no goals"
 - [ ] Modification on the `search_tree.py`

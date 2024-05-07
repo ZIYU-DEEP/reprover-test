@@ -118,11 +118,11 @@ class GeneratorDataset(Dataset):
                 input_text = ex["state"]
                 output_text = ex["tactic"]
                 
-            elif self.gen_type == "goal_prediction":
+            elif self.gen_type == "goal":
                 input_text = f"[CURRENT GOAL]\n{ex['state']}\n[NEXT GOAL]\n"
                 output_text = ex["target_state"]
                 
-            elif self.gen_type == "goal_driven_tactic_prediction":
+            elif self.gen_type == "goal_driven_tactic":
                 input_text = f"[CURRENT GOAL]\n{ex['state']}\n[TARGET GOAL]\n{ex['target_state']}\n[PROOFSTEP]\n"
                 output_text = ex["tactic"]
                 
