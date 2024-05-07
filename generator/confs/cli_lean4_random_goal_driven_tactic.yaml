@@ -1,8 +1,11 @@
 # Add the checkpoint path
 init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt
+# init_ckpt_path: lightning_logs/goal_driven_tactic/lightning_logs/version_3/checkpoints/epoch=0-step=240.ckpt
+ckpt_path: null # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
 
 trainer:
+  default_root_dir: './lightning_logs/goal_driven_tactic'
   accelerator: gpu
   devices: 1
   precision: bf16-mixed
@@ -13,7 +16,7 @@ trainer:
       offload_optimizer: false
       cpu_checkpointing: false
   gradient_clip_val: 1.0
-  max_steps: 500000  # num_epoch is (max_steps * num_batches) / batch_size 
+  max_steps: 240  # num_epoch is (max_steps * num_batches) / batch_size 
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
   callbacks:
@@ -38,7 +41,7 @@ trainer:
 model:
   model_name: google/byt5-small
   lr: 5e-4
-  warmup_steps: 1
+  warmup_steps: 2000
   num_beams: 1
   length_penalty: 0.0
   ret_ckpt_path: null
