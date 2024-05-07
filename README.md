@@ -350,6 +350,7 @@ git lfs fetch --all
 ```
 
 ### TODO
+- [x] Set the init_ckpt (just loading weights) and the ckpt (restoring the training state)
 - [x] Check if current version works (we change input ids)
 - [ ] Modification on the `model.py`
     - [x] Add `gen_type` to the generator
@@ -359,14 +360,12 @@ git lfs fetch --all
         - Baseline eval for goal_driven_tactic: set the next tactic as "no goals"
 - [x] Modification on the `datamodule.py`
     - [x] Modify the `collate` function to adapt to different `gen_type`
-- [ ] We may need set a different max length for goal_driven_tactic_prediction
+- [x] We need set a different max length for goal_driven_tactic_prediction
     - The length may get doubled.
 - [ ] Modification on the `evaluate.py`
     - We may still be able to evaluate goal_driven_tactic. simply set all the target state to be "no goals"
+    - Set evaluation for the bilevel approach
     - Adding the baseline eval for goal_driven_tactic
 - [ ] Modification on the `search_tree.py`
-- Set them into different directory
-- Set evaluation for the bilevel approach
-- Adding smt! to current setting
-- Adding a mixed training approach
-- [ ] Adding training from checkpoint with the optimizer state correctly loaded
+- [ ] Adding smt! to current setting
+- [ ] Adding a mixed training approach
