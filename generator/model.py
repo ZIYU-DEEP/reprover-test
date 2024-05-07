@@ -230,6 +230,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     ##############
 
     def validation_step(self, batch: Dict[str, Any], _) -> None:
+        """Calculate the validation loss."""
         # Get the ids and the masks
         input_ids = batch["input_ids"]
         input_mask = batch["input_mask"]
@@ -281,26 +282,35 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             )
 
     def on_validation_epoch_end(self) -> None:
+        """Evaluate the model using real proof search in lean."""
+        
+        # Skip evaluation is you do not want to
         if self.eval_num_theorems == 0:
             return
 
         # TODO: add task_type here to skip evaluation if task_type is goal_prediction
         from prover.evaluate import evaluate  # Avoid circular import.
 
+        # Save current model
         ckpt_path = f"{self.trainer.log_dir}/checkpoints/last-tmp.ckpt"
         self.trainer.save_checkpoint(ckpt_path)
         logger.info(f"Saved checkpoint to {ckpt_path}. Evaluating...")
         torch.cuda.empty_cache()
 
+        # Evaluate on the benchmark
         data_path = self.trainer.datamodule.data_path
         if self.retriever is None:
-            acc = evaluate(
-                data_path=data_path,
-                num_workers=self.eval_num_workers,
-                num_gpus=self.eval_num_gpus,
-                num_theorems=self.eval_num_theorems,
-                ckpt_path=ckpt_path,
-            )
+            if self.gen_type == 'default':
+                acc = evaluate(
+                    data_path=data_path,
+                    num_workers=self.eval_num_workers,
+                    num_gpus=self.eval_num_gpus,
+                    num_theorems=self.eval_num_theorems,
+                    ckpt_path=ckpt_path,
+                )
+            else:
+                # TODO: temporarily skip for other types
+                acc = float("nan")
             
         # ---------------------------------------------------------------
         # PREMISE-RELEVANT
@@ -313,14 +323,18 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
                 ),
                 open(corpus_path, "wb"),
             )
-            acc = evaluate(
-                data_path=data_path,
-                num_workers=self.eval_num_workers,
-                num_gpus=self.eval_num_gpus,
-                num_theorems=self.eval_num_theorems,
-                ckpt_path=ckpt_path,
-                indexed_corpus_path=corpus_path,
-            )
+            if self.gen_type == 'default':
+                acc = evaluate(
+                    data_path=data_path,
+                    num_workers=self.eval_num_workers,
+                    num_gpus=self.eval_num_gpus,
+                    num_theorems=self.eval_num_theorems,
+                    ckpt_path=ckpt_path,
+                    indexed_corpus_path=corpus_path,
+                )
+            else:
+                # TODO: temporarily skip for other types
+                acc = float("nan")
         # ---------------------------------------------------------------
 
         self.log("Pass@1_val", acc, on_step=False, on_epoch=True, sync_dist=True)
@@ -558,6 +572,7 @@ class GPT4TacticGenerator(TacticGenerator):
         ]
 
 
+# TODO: CHECK IF WE NEED TO MODIFY HERE
 class FixedTacticGenerator(TacticGenerator):
     def __init__(self, tactic, module) -> None:
         self.tactic = tactic
