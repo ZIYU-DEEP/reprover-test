@@ -353,13 +353,17 @@ git lfs fetch --all
 - [x] Check if current version works (we change input ids)
 - [ ] Modification on the `model.py`
     - [x] Add `gen_type` to the generator
-    - [ ] When `gen_type` is goal generation, we shouldn't do tactic eval.
+    - [x] When `gen_type` is goal generation, we shouldn't do tactic eval.
+    - [ ] Adapt the evaluation for different tactic search
+        - No need to eval goal
+        - Baseline eval for goal_driven_tactic: set the next tactic as "no goals"
 - [x] Modification on the `datamodule.py`
     - [x] Modify the `collate` function to adapt to different `gen_type`
 - [ ] We may need set a different max length for goal_driven_tactic_prediction
     - The length may get doubled.
 - [ ] Modification on the `evaluate.py`
     - We may still be able to evaluate goal_driven_tactic. simply set all the target state to be "no goals"
+    - Adding the baseline eval for goal_driven_tactic
 - [ ] Modification on the `search_tree.py`
 - Set them into different directory
 - Set evaluation for the bilevel approach

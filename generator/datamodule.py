@@ -37,6 +37,8 @@ class GeneratorDataset(Dataset):
         gen_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
+        
+        assert gen_type in ['default', 'goal', 'goal_driven_tactic']
         self.corpus = corpus
         self.keep_marks = keep_marks
         self.preds = preds
@@ -195,6 +197,8 @@ class GeneratorDataModule(pl.LightningDataModule):
         gen_type: str="default",  # Allow different patterns
     ) -> None:
         super().__init__()
+        
+        assert gen_type in ['default', 'goal', 'goal_driven_tactic']
         self.data_path = data_path
         if corpus_path is not None:
             self.corpus = Corpus(corpus_path)
