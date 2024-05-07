@@ -59,10 +59,10 @@ class TacticGenerator(ABC):
     - default:
         - input: ex["state"]
         - output: ex["tactic"]
-    - goal_prediction:
+    - goal:
         - input: f'[CURRENT GOAL]\n{ex["state"]}\n[NEXT GOAL]\n'
         - output: ex["target_state"]
-    - goal_driven_tactic_prediction:
+    - goal_driven_tactic:
         - input: f'[CURRENT GOAL]\n{ex["state"]}\n[TARGET GOAL]\n{ex["target_state"]}\n[PROOFSTEP]\n'
         - output: ex["tactic"]
     """
