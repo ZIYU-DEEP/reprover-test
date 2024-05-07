@@ -39,12 +39,6 @@ class CustomCLI(LightningCLI):
             logger.info(f"Model loaded from checkpoint: {init_ckpt_path}")
         else:
             logger.info("No checkpoint provided; starting training from scratch.")
-        breakpoint()
-    
-    def fit(self):
-        breakpoint()
-        self.trainer.fit(self.model, self.datamodule, ckpt_path=self.config.fit.ckpt_path)
-
 
 def main():
     # Set the logger
