@@ -13,7 +13,7 @@ trainer:
       offload_optimizer: false
       cpu_checkpointing: false
   gradient_clip_val: 1.0
-  max_steps: 160  # num_epoch is (max_steps * num_batches) / batch_size 
+  max_steps: 80  # num_epoch is (max_steps * num_batches) / batch_size 
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
   callbacks:
@@ -46,7 +46,7 @@ model:
   eval_num_workers: 5  # Lower this number if you don't have 80GB GPU memory.
   eval_num_gpus: 1
   eval_num_theorems: 250  # Lower this number will make validation faster (but noiser).
-  gen_type: goal
+  gen_type: default
 
 data:
   data_path: data/leandojo_benchmark_4/random/
@@ -55,11 +55,11 @@ data:
   preds_path: null
   batch_size: 8  # effective_batch_size == batch_size * accumulate_grad_batches * devices
   eval_batch_size: 64
-  max_inp_seq_len: 4600
+  max_inp_seq_len: 2300
   max_oup_seq_len: 512
   p_drop: 0.5
   normalize_tactics: true
   num_workers: 2
-  gen_type: goal
+  gen_type: default
 
 
