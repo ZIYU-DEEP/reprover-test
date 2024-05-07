@@ -11,3 +11,12 @@ python prover/evaluate.py \
     --num-workers 5 \
     --num-gpus 1 \
     --num-theorems 1
+
+python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_goal_driven_tactic.yaml
+
+python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_goal_driven_tactic.yaml
+
+python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_goal.yaml

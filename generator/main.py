@@ -1,8 +1,10 @@
 from pytorch_lightning.cli import LightningCLI
-import os
 from loguru import logger
+import os
+
 from generator.model import RetrievalAugmentedGenerator
 from generator.datamodule import GeneratorDataModule
+from common import set_logger
 
 class CustomCLI(LightningCLI):
     def add_arguments_to_parser(self, parser):
@@ -11,14 +13,7 @@ class CustomCLI(LightningCLI):
         # New arguments to start with a ckpt
         parser.add_argument("--init_ckpt_path", type=str, default=None,
                             help="Path to the checkpoint file to init the model.")
-        
-        # New arguments on gen_type
-        # parser.add_argument("--model.gen_type", type=str, default="default",
-        #                     help="Type of generation task for the model: default, target-goal, or goal-conditioned")
-        # parser.add_argument("--data.gen_type", type=str, default="default",
-        #                     help="Type of generation task for the data module: default, target-goal, or goal-conditioned")
-        
-        
+           
         # Linking arguments
         parser.link_arguments("model.model_name", "data.model_name")
         parser.link_arguments("data.max_inp_seq_len", "model.max_inp_seq_len")
@@ -44,15 +39,24 @@ class CustomCLI(LightningCLI):
             logger.info(f"Model loaded from checkpoint: {init_ckpt_path}")
         else:
             logger.info("No checkpoint provided; starting training from scratch.")
+        breakpoint()
+    
+    def fit(self):
+        breakpoint()
+        self.trainer.fit(self.model, self.datamodule, ckpt_path=self.config.fit.ckpt_path)
 
 
 def main():
+    # Set the logger
+    set_logger(verbose=True)
     logger.info(f"PID: {os.getpid()}.")
     logger.info(f"Starting the training process.")
+    
+    # Set the client and train
     cli = CustomCLI(model_class=RetrievalAugmentedGenerator, 
                     datamodule_class=GeneratorDataModule,
                     run=True)
-    logger.info(f"Configuration loaded and CLI setup is complete.")
+    logger.info(f"Configuration loaded and training is complete.")
 
 
 if __name__ == "__main__":
