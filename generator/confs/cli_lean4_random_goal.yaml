@@ -29,6 +29,8 @@ trainer:
         save_last: true
         monitor: Pass@1_val
         mode: max
+        every_n_train_steps: 2000
+        every_n_epochs: 1
     - class_path: pytorch_lightning.callbacks.EarlyStopping
       init_args:
         monitor: Pass@1_val
