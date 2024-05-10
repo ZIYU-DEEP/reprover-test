@@ -109,7 +109,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     ) -> None:
         super().__init__()
         
-        assert gen_type in ['default', 'goal', 'goal_driven_tactic']
+        assert gen_type in ['default', 'goal', 'goal_driven_tactic', 'joint']
         self.save_hyperparameters()
         self.lr = lr
         self.warmup_steps = warmup_steps
