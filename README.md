@@ -370,3 +370,7 @@ git lfs fetch --all
 - [ ] Adding smt! to current setting
 - [ ] Adding a mixed training approach
 - [x] Check wandb or tensorboard.
+
+
+### Notes on setting up on Lambda AI
+
