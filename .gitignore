@@ -12,6 +12,9 @@ local/
 __pycache__/
 *.py[cod]
 *$py.class
+wandb/
+**/local/
+
 
 # C extensions
 *.so
