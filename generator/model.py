@@ -202,9 +202,6 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         input_ids: torch.LongTensor,
         output_ids: torch.LongTensor,
     ) -> None:
-        # Get the tensorboard logger
-        tb = self.logger.experiment
-        
         # Get the first input in the batch as an example
         inp = self.tokenizer.decode(input_ids[0], skip_special_tokens=True)
         
@@ -214,9 +211,41 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         )
         oup = self.tokenizer.decode(oup_ids, skip_special_tokens=True)
         
-        # Log the example input state and tactic
-        tb.add_text(f"{split}_input", f"```\n{inp}\n```", self.global_step)
-        tb.add_text(f"{split}_output", f"`{oup}`", self.global_step)
+        # Log the example input state and tactic using self.logger
+        self.logger.log_text(
+            key=f"{split}_input",
+            columns=["text"],
+            data=[[inp]],
+            step=self.global_step,
+        )
+        self.logger.log_text(
+            key=f"{split}_output",
+            columns=["text"],
+            data=[[oup]],
+            step=self.global_step,
+        )
+    
+    # def _log_io_texts(
+    #     self,
+    #     split: str,
+    #     input_ids: torch.LongTensor,
+    #     output_ids: torch.LongTensor,
+    # ) -> None:
+    #     # Get the tensorboard logger
+    #     tb = self.logger.experiment
+        
+    #     # Get the first input in the batch as an example
+    #     inp = self.tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        
+    #     # Get the first output in the batch as an example
+    #     oup_ids = torch.where(
+    #         output_ids[0] == -100, self.tokenizer.pad_token_id, output_ids[0]
+    #     )
+    #     oup = self.tokenizer.decode(oup_ids, skip_special_tokens=True)
+        
+    #     # Log the example input state and tactic
+    #     tb.add_text(f"{split}_input", f"```\n{inp}\n```", self.global_step)
+    #     tb.add_text(f"{split}_output", f"`{oup}`", self.global_step)
 
     def on_fit_start(self) -> None:
         if self.logger is not None:
