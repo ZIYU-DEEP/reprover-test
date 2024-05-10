@@ -169,9 +169,9 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             labels=output_ids,
         ).loss
 
-    ############
-    # Training #
-    ############
+    ########################################################################
+    # Training 
+    ########################################################################
 
     def training_step(self, batch, batch_idx: int):
         # Calling the forward method
@@ -224,28 +224,6 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             data=[[oup]],
             step=self.global_step,
         )
-    
-    # def _log_io_texts(
-    #     self,
-    #     split: str,
-    #     input_ids: torch.LongTensor,
-    #     output_ids: torch.LongTensor,
-    # ) -> None:
-    #     # Get the tensorboard logger
-    #     tb = self.logger.experiment
-        
-    #     # Get the first input in the batch as an example
-    #     inp = self.tokenizer.decode(input_ids[0], skip_special_tokens=True)
-        
-    #     # Get the first output in the batch as an example
-    #     oup_ids = torch.where(
-    #         output_ids[0] == -100, self.tokenizer.pad_token_id, output_ids[0]
-    #     )
-    #     oup = self.tokenizer.decode(oup_ids, skip_special_tokens=True)
-        
-    #     # Log the example input state and tactic
-    #     tb.add_text(f"{split}_input", f"```\n{inp}\n```", self.global_step)
-    #     tb.add_text(f"{split}_output", f"`{oup}`", self.global_step)
 
     def on_fit_start(self) -> None:
         if self.logger is not None:
@@ -256,9 +234,9 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         if self.retriever is not None:
             self.retriever.load_corpus(self.trainer.datamodule.corpus)
 
-    ##############
-    # Validation #
-    ##############
+    ########################################################################
+    # Validation
+    ########################################################################
 
     def validation_step(self, batch: Dict[str, Any], _) -> None:
         """Calculate the validation loss."""
@@ -271,7 +249,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         loss = self(input_ids, 
                     input_mask, 
                     output_ids)
-        self.log(f"loss_val", loss, on_step=False, on_epoch=True, sync_dist=True)
+        self.log(f"loss_val", loss, on_step=True, on_epoch=True, sync_dist=True)
         self._log_io_texts("val", input_ids, output_ids)
 
         # Generate topk candidates via Beam Search.
@@ -296,9 +274,9 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             for i in range(batch_size)
         ]
 
-        tb = self.logger.experiment
         msg = "\n".join(outputs_pred[0])
-        tb.add_text(f"preds_val", f"```\n{msg}\n```", self.global_step)
+        self.logger.log_text(key=f"preds_val", columns=["text"],
+                             data=[[msg]], step=self.global_step)
 
         # Log the topk accuracies.
         for k in range(1, self.num_beams + 1):
@@ -368,7 +346,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
                 acc = float("nan")
         # ---------------------------------------------------------------
 
-        self.log("Pass@1_val", acc, on_step=False, on_epoch=True, sync_dist=True)
+        self.log("Pass@1_val", acc, on_step=True, on_epoch=True, sync_dist=True)
         logger.info(f"Pass@1: {acc}")
 
         if os.path.exists(ckpt_path):

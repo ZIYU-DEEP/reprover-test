@@ -18,5 +18,15 @@ python generator/main.py fit \
 python generator/main.py fit \
     --config generator/confs/cli_lean4_random_goal_driven_tactic.yaml
 
-python generator/main.py fit \
-    --config generator/confs/cli_lean4_random_goal.yaml
+python generator/main.py fit --config generator/confs/cli_lean4_random_joint.yaml
+
+python generator/main.py fit --config generator/confs/cli_lean4_random_goal.yaml
+
+srun --gres=gpu:A100:1 \
+     --mem=80G \
+     --ntasks-per-node=1 \
+     --account=gts-czhang355 \
+     -q inferno \
+     -t 1:00:00 \
+     -C A100-80GB \
+     bash -c "python generator/main.py fit --config generator/confs/cli_lean4_random_goal_driven_tactic.yaml"
