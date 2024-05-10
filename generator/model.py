@@ -249,7 +249,10 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
         loss = self(input_ids, 
                     input_mask, 
                     output_ids)
-        self.log(f"loss_val", loss, on_step=True, on_epoch=True, sync_dist=True)
+        self.log(f"loss_val", 
+                 loss, 
+                 on_step=True, on_epoch=True, sync_dist=True, 
+                 batch_size=len(batch))
         self._log_io_texts("val", input_ids, output_ids)
 
         # Generate topk candidates via Beam Search.
@@ -288,6 +291,7 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
                 on_step=False,
                 on_epoch=True,
                 sync_dist=True,
+                batch_size=len(batch),
             )
 
     def on_validation_epoch_end(self) -> None:

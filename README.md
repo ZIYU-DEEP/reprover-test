@@ -369,4 +369,4 @@ git lfs fetch --all
 - [ ] Modification on the `search_tree.py`
 - [ ] Adding smt! to current setting
 - [ ] Adding a mixed training approach
-- [ ] Check wandb or tensorboard.
+- [x] Check wandb or tensorboard.
