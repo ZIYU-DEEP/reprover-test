@@ -38,7 +38,7 @@ class GeneratorDataset(Dataset):
     ) -> None:
         super().__init__()
         
-        assert gen_type in ['default', 'goal', 'goal_driven_tactic']
+        assert gen_type in ['default', 'goal', 'goal_driven_tactic', 'joint']
         self.corpus = corpus
         self.keep_marks = keep_marks
         self.preds = preds
@@ -121,12 +121,16 @@ class GeneratorDataset(Dataset):
                 output_text = ex["tactic"]
                 
             elif self.gen_type == "goal":
-                input_text = f"[CURRENT GOAL]\n{ex['state']}\n[NEXT GOAL]\n"
+                input_text = f"[CURRENT GOAL]\n{ex['state']}\n[TARGET GOAL]\n"
                 output_text = ex["target_state"]
                 
             elif self.gen_type == "goal_driven_tactic":
                 input_text = f"[CURRENT GOAL]\n{ex['state']}\n[TARGET GOAL]\n{ex['target_state']}\n[PROOFSTEP]\n"
                 output_text = ex["tactic"]
+            
+            elif self.gen_type == "joint":
+                input_text = f"[CURRENT GOAL]\n{ex['state']}\n"
+                output_text = f"[TARGET GOAL]\n{ex['target_state']}\n[PROOFSTEP]\n{ex['tactic']}\n"
                 
             else:
                 raise ValueError("Unsupported generation type")
@@ -198,7 +202,7 @@ class GeneratorDataModule(pl.LightningDataModule):
     ) -> None:
         super().__init__()
         
-        assert gen_type in ['default', 'goal', 'goal_driven_tactic']
+        assert gen_type in ['default', 'goal', 'goal_driven_tactic', 'joint']
         self.data_path = data_path
         if corpus_path is not None:
             self.corpus = Corpus(corpus_path)
