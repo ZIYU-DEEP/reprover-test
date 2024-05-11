@@ -1,0 +1,10 @@
+torch==2.3.0
+loguru==0.7.2
+deepspeed==0.14.2
+"pytorch-lightning[extra]"==2.2.4
+transformers==4.40.2
+tensorboard
+openai
+rank_bm25
+lean-dojo
+"huggingface_hub[cli]"
