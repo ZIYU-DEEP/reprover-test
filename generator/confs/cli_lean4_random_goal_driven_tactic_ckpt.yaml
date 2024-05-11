@@ -1,5 +1,6 @@
 # Add the checkpoint path
-init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt
+init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt  # This should only load the weight
+init_ckpt_filename: checkpoint/mp_rank_00_model_states.pt  
 # init_ckpt_path: null
 ckpt_path: null # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
