@@ -343,6 +343,9 @@ export TMPDIR=/localscratch/hsun409/tmp
 
 ### Checkpoints
 ```
+sudo apt-get update
+sudo apt-get install git-lfs
+
 git lfs install
 git clone https://huggingface.co/kaiyuy/leandojo-pl-ckpts.git
 cd leandojo-pl-ckpts
