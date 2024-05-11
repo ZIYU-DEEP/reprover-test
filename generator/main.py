@@ -4,6 +4,7 @@ from loguru import logger
 
 import os
 import wandb
+import torch
 
 from generator.model import RetrievalAugmentedGenerator
 from generator.datamodule import GeneratorDataModule
@@ -37,11 +38,21 @@ class CustomCLI(LightningCLI):
             else: device = 'cpu' 
 
             # Load the model
-            self.model = RetrievalAugmentedGenerator.load(
-                ckpt_path=init_ckpt_path,
-                device=device,
-                freeze=False
-            )
+            # self.model = RetrievalAugmentedGenerator.load(
+            #     ckpt_path=init_ckpt_path,
+            #     device=device,
+            #     freeze=False
+            # )
+            ckpt_file = os.path.join(init_ckpt_path, 
+                                     "checkpoint/mp_rank_00_model_states.pt")
+            ckpt_module = torch.load(ckpt_file)['module']
+            self.model.generator.load_state_dict(ckpt_module,
+                                                 strict=False)
+            breakpoint()
+            # self.model.generator.load_state_dict(
+            #     torch.load(init_ckpt_path)['state_dict'],
+            #     strict=False,
+            # )
             logger.info(f"Model loaded from checkpoint: {init_ckpt_path}")
         else:
             logger.info("No checkpoint provided; training from scratch.")
