@@ -53,7 +53,7 @@ class CustomCLI(LightningCLI):
         if not os.path.exists(log_dir): os.makedirs(log_dir)
         
         # Set the key words
-        train_mode = 'pretrained' if init_ckpt_path else 'scratch'
+        train_mode = 'ckpt' if init_ckpt_path else 'scratch'
         lr = self.config.fit.model.lr
         bs = self.config.fit.data.batch_size
         ms = self.config.fit.trainer.max_steps
