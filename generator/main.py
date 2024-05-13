@@ -51,13 +51,15 @@ class CustomCLI(LightningCLI):
         # Set the key words
         train_mode = 'pretrained' if init_ckpt_path else 'scratch'
         lr = self.config.fit.model.lr
-        warmup_steps = self.config.fit.model.warmup_steps
-        max_steps = self.config.fit.trainer.max_steps
+        bs = self.config.fit.data.batch_size
+        ms = self.config.fit.trainer.max_steps
+        gpus = self.config.fit.trainer.devices
+        
         
         # Notice by default, it will take control of the ckpt saving process
         wandb_logger = WandbLogger(
             project=f"reprover-{self.config.fit.model.gen_type}",
-            name=f"{train_mode}-{lr}-{warmup_steps}-{max_steps}",
+            name=f"{train_mode}-lr{lr}-bs{bs}-steps{ms}-gpus{gpus}",
             save_dir=self.config.fit.trainer.default_root_dir,
             log_model=False,  # Do not upload to wandb cloud
         )
