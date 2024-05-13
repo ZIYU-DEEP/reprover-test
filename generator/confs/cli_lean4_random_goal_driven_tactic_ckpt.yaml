@@ -6,7 +6,7 @@ ckpt_path: null # Setting a path will restore the training process  # https://gi
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
 
 trainer:
-  default_root_dir: './lightning_logs/goal_driven_tactic'
+  default_root_dir: './lightning_logs/goal_driven_tactic_ckpt'
   accelerator: gpu
   devices: 1
   precision: bf16-mixed
