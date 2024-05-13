@@ -20,7 +20,7 @@ trainer:
   max_steps: 100000  # num_epoch is (max_steps * num_batches) / batch_size 
   # val_check_interval: 5999  # Perform validation every 200 training steps
   check_val_every_n_epoch: 1
-  num_sanity_val_steps: -1
+  num_sanity_val_steps: 0
 
   callbacks:
     - class_path: pytorch_lightning.callbacks.LearningRateMonitor
@@ -30,7 +30,7 @@ trainer:
     - class_path: pytorch_lightning.callbacks.ModelCheckpoint
       init_args:
         verbose: true
-        save_top_k: 20
+        save_top_k: 50
         monitor: loss_val
         mode: min
         every_n_train_steps: 10000  # the saving frequency for the model
@@ -54,7 +54,7 @@ model:
   length_penalty: 0.0
   ret_ckpt_path: null
   eval_num_retrieved: 100
-  eval_num_workers: 5  # Lower this number if you don't have 80GB GPU memory.
+  eval_num_workers: 8  # Lower this number if you don't have 80GB GPU memory.
   eval_num_gpus: 1
   eval_num_theorems: 0  # Lower this number will make validation faster (but noiser).
   gen_type: goal_driven_tactic
@@ -70,7 +70,7 @@ data:
   max_oup_seq_len: 512
   p_drop: 0.5
   normalize_tactics: true
-  num_workers: 2
+  num_workers: 8
   gen_type: goal_driven_tactic
 
 

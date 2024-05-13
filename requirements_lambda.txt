@@ -8,6 +8,7 @@ rank_bm25
 lean-dojo
 huggingface_hub[cli]
 tensorboard==2.16.2
-scipy==1.13.0
+scipy==1.11.0
 joblib==1.4.2
-pandas
+pandas==2.2.2
+wandb==0.17.0

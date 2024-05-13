@@ -19,7 +19,8 @@ trainer:
   gradient_clip_val: 1.0
   max_steps: 100000  # num_epoch is (max_steps * num_batches) / batch_size 
   check_val_every_n_epoch: 1
-  num_sanity_val_steps: 5
+  num_sanity_val_steps: -1
+
   callbacks:
 
     - class_path: pytorch_lightning.callbacks.LearningRateMonitor
@@ -29,9 +30,14 @@ trainer:
     - class_path: pytorch_lightning.callbacks.ModelCheckpoint
       init_args:
         verbose: true
-        every_n_train_steps: 6000  # the saving frequency for the model
-        save_on_train_epoch_end: True
+        verbose: true
+        save_top_k: 50
+        monitor: loss_val
+        mode: min
+        every_n_train_steps: 10000  # the saving frequency for the model
+        save_on_train_epoch_end: true
         filename: 'checkpoint-{epoch:02d}-{step}-{loss_val:.4f}-{loss_train:.4f}'
+        enable_version_counter: true
 
     - class_path: pytorch_lightning.callbacks.EarlyStopping
       init_args:
