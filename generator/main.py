@@ -48,13 +48,16 @@ class CustomCLI(LightningCLI):
 
         # ------------------------------------------------------------------
         # Set the wandb logger
+        # Check the path
+        log_dir = self.config.fit.trainer.default_root_dir
+        if not os.path.exists(log_dir): os.makedirs(log_dir)
+        
         # Set the key words
         train_mode = 'pretrained' if init_ckpt_path else 'scratch'
         lr = self.config.fit.model.lr
         bs = self.config.fit.data.batch_size
         ms = self.config.fit.trainer.max_steps
         gpus = self.config.fit.trainer.devices
-        
         
         # Notice by default, it will take control of the ckpt saving process
         wandb_logger = WandbLogger(
