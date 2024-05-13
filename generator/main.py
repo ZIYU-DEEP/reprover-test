@@ -61,7 +61,7 @@ class CustomCLI(LightningCLI):
             project=f"reprover-{self.config.fit.model.gen_type}",
             name=f"{train_mode}-lr{lr}-bs{bs}-steps{ms}-gpus{gpus}",
             save_dir=self.config.fit.trainer.default_root_dir,
-            log_model=False,  # Do not upload to wandb cloud
+            log_model=False,  # Do not upload model weights to wandb cloud
         )
         self.trainer.logger = wandb_logger
         # ------------------------------------------------------------------

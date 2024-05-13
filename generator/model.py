@@ -180,6 +180,8 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             batch["input_mask"],  # mask (i.e., ignoring padding tokens)
             batch["output_ids"],  # output
         )
+        
+        # Add the loss to the model-checkpoint
         self.log(
             "loss_train",
             loss,
@@ -189,6 +191,12 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
             batch_size=len(batch),
         )
         self._log_io_texts("train", batch["input_ids"], batch["output_ids"])
+        
+        # Add a workaround on to record loss_val when we do not have it
+        if "loss_val" not in self.trainer.callback_metrics:
+            # Log a dummy value for loss_val
+            self.log("loss_val", 1000.0)
+        
         return loss
 
     def configure_optimizers(self) -> Dict[str, Any]:
@@ -237,6 +245,12 @@ class RetrievalAugmentedGenerator(TacticGenerator, pl.LightningModule):
     ########################################################################
     # Validation
     ########################################################################
+    # def on_fit_start(self):
+    #     if self.logger:
+    #         self.logger.experiment.log({"loss_val": 1000.0})
+
+    # def on_train_start(self):
+    #     self.log("loss_val", 1000.0)
 
     def validation_step(self, batch: Dict[str, Any], _) -> None:
         """Calculate the validation loss."""
