@@ -329,6 +329,12 @@ python prover/evaluate.py --data-path data/leandojo_benchmark_4/random/  --ckpt_
 * To report a potential bug, please open an issue.
 
 ## Other Setups
+### Notes on elan
+```
+curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh
+source $HOME/.elan/env
+```
+
 ### Notes on deepspeed
 ```
 export PATH=/usr/local/cuda/bin:$PATH
@@ -336,10 +342,6 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export CPATH=/usr/local/cuda/include:$CPATH
 ```
 
-### Some Local Things
-```
-export TMPDIR=/localscratch/hsun409/tmp
-```
 
 ### Checkpoints
 ```

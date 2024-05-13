@@ -145,7 +145,7 @@ The `model.py` file contains the implementation of a PyTorch Lightning module na
 
 ### Utilities
 
-- **`_log_io_texts`:** Logs the input and output texts to TensorBoard for monitoring during training or validation phases.
+- **`_log_io_texts`:** Logs the input and output texts to wandb for monitoring during training or validation phases.
 - **`configure_optimizers`:** Sets up optimizers and learning rate schedules based on the model configuration.
 
 ### Usage
