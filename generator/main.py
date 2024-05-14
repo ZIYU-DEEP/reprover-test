@@ -67,8 +67,8 @@ class CustomCLI(LightningCLI):
             log_model=False,  # Do not upload model weights to wandb cloud
         )
         self.trainer.logger = wandb_logger
+        logger.info("Wandb logger setup complete")
         # ------------------------------------------------------------------
-        
         
 def main():
     
