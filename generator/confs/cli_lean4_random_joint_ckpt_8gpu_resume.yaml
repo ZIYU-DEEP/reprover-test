@@ -1,8 +1,8 @@
 # Add the checkpoint path
-init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt  # This should only load the weight
+init_ckpt_path: /home/ubuntu/chicago/github/reprover-test/lightning_logs/joint_ckpt/reprover-joint/gs7qewdn/checkpoints/checkpoint-epoch=01-step=7200-loss_val=0.1362-loss_train=0.1102.ckpt  # This should only load the weight
 init_ckpt_filename: checkpoint/mp_rank_00_model_states.pt  
 # init_ckpt_path: null
-ckpt_path: null # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950  # however deepspeed requires the number of devices to be the same
+ckpt_path: /home/ubuntu/chicago/github/reprover-test/lightning_logs/joint_ckpt/reprover-joint/gs7qewdn/checkpoints/checkpoint-epoch=01-step=7200-loss_val=0.1362-loss_train=0.1102.ckpt # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950  # however deepspeed requires the number of devices to be the same
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
 
 trainer:

@@ -49,20 +49,6 @@ class GeneratorDataset(Dataset):
         self.is_train = is_train
         self.data = self._load_data(data_path, normalize_tactics)
         self.gen_type = gen_type
-        
-        # DEBUG - keep track of the current index
-        self.current_idx = 0
-
-    # -------------------------------------------------------------
-    # DEBUG - help the model to resume during an epoch
-    def state_dict(self) -> Dict[str, Any]:
-        logger.info(f"Saving state: current_idx={self.current_idx}")
-        return {"current_idx": self.current_idx}
-
-    def load_state_dict(self, state_dict: Dict[str, Any]) -> None:
-        self.current_idx = state_dict["current_idx"]
-        logger.info(f"Loaded state: current_idx={self.current_idx}")
-    # -------------------------------------------------------------
 
     def _load_data(self, data_path: str, normalize_tactics: bool) -> List[Example]:
         data = []
@@ -96,8 +82,6 @@ class GeneratorDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx: int) -> Example:
-        self.current_idx = idx # DEBUG
-        
         ex = self.data[idx]
 
         # ---------------------------------------------------------------
