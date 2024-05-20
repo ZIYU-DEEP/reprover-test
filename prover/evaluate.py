@@ -23,6 +23,7 @@ def _get_theorems(
     full_name: str,
     name_filter: str,
     num_theorems: int,
+    start_ind: int=0,
 ) -> Tuple[LeanGitRepo, List[Theorem], List[Pos]]:
     """
     Retrieves theorems from the specified data source.
@@ -42,12 +43,13 @@ def _get_theorems(
                                and list of positions.
     """
     repo, theorems, positions = _get_theorems_from_files(
-        data_path,
-        split,
-        file_path,
-        full_name,
-        name_filter,
-        num_theorems,
+        data_path=data_path,
+        split=split,
+        file_path=file_path,
+        full_name=full_name,
+        name_filter=name_filter,
+        num_theorems=num_theorems,
+        start_ind=start_ind,
     )
 
     # Check if all theorem's repos are available in the cache
@@ -67,6 +69,7 @@ def _get_theorems_from_files(
     full_name: Optional[str],
     name_filter: Optional[str],
     num_theorems: Optional[int],
+    start_ind: int=0,
 ) -> Tuple[LeanGitRepo, List[Theorem], List[Pos]]:
     """
     Helper function for _get_theorems.
@@ -100,6 +103,13 @@ def _get_theorems_from_files(
     )
     theorems, positions = zip(*theorems_and_positions)
     theorems, positions = list(theorems), list(positions)
+    
+    # Slice theorems and positions based on start index
+    if start_ind:
+        theorems = theorems[start_ind:]
+        positions = positions[start_ind:]
+    start_theorem_name = theorems[0].full_name
+    logger.info(f"Starting from {start_ind}th theorem named {start_theorem_name}!")
 
     # Limit the number of theorems if specified
     if num_theorems is not None:
@@ -131,6 +141,7 @@ def evaluate(
     num_workers: int = 1,
     num_gpus: int = 0,
     verbose: bool = False,
+    start_ind: int = 0,
 ) -> float:
     """
     Evaluates the prover on the specified theorems.
@@ -141,7 +152,13 @@ def evaluate(
     set_logger(verbose)
 
     repo, theorems, positions = _get_theorems(
-        data_path, split, file_path, full_name, name_filter, num_theorems
+        data_path=data_path, 
+        split=split, 
+        file_path=file_path, 
+        full_name=full_name, 
+        name_filter=name_filter, 
+        num_theorems=num_theorems,
+        start_ind=start_ind,
     )
 
     # Search for proofs using multiple concurrent provers.
@@ -246,6 +263,10 @@ def main() -> None:
     parser.add_argument(
         "--verbose", action="store_true", help="Set the logging level to DEBUG."
     )
+    
+    # New arguments added by neurips ddl
+    parser.add_argument("--start-ind", type=int, default=0, help="The starting index of theorems to evaluate.")
+
     args = parser.parse_args()
 
     assert args.ckpt_path or args.tactic
@@ -271,6 +292,7 @@ def main() -> None:
         args.num_workers,
         args.num_gpus,
         args.verbose,
+        args.start_ind,
     )
 
     logger.info(f"Pass@1: {pass_1}")
