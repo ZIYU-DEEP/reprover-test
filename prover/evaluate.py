@@ -24,6 +24,23 @@ def _get_theorems(
     name_filter: str,
     num_theorems: int,
 ) -> Tuple[LeanGitRepo, List[Theorem], List[Pos]]:
+    """
+    Retrieves theorems from the specified data source.
+
+    Args:
+        data_path (str): Path to the data extracted by LeanDojo.
+        split (str): The data split to use (e.g., 'val', 'test').
+        file_path (str): Filter theorems by the specified file path.
+        full_name (str): Filter theorems by the specified full name.
+        name_filter (str): Filter theorems by the specified name filter.
+        num_theorems (int): The maximum number of theorems to retrieve.
+
+    Returns:
+        Tuple[LeanGitRepo, List[Theorem], List[Pos]]: 
+            A tuple containing the repository, 
+                               list of theorems, 
+                               and list of positions.
+    """
     repo, theorems, positions = _get_theorems_from_files(
         data_path,
         split,
@@ -33,6 +50,7 @@ def _get_theorems(
         num_theorems,
     )
 
+    # Check if all theorem's repos are available in the cache
     all_repos = {thm.repo for thm in theorems}
     for r in all_repos:
         assert is_available_in_cache(
@@ -50,10 +68,15 @@ def _get_theorems_from_files(
     name_filter: Optional[str],
     num_theorems: Optional[int],
 ) -> Tuple[LeanGitRepo, List[Theorem], List[Pos]]:
+    """
+    Helper function for _get_theorems.
+    """
+    # Load theorems from JSON file
     data = json.load(open(os.path.join(data_path, f"{split}.json")))
     theorems = []
     positions = []
 
+    # Filter theorems
     for t in data:
         if file_path is not None and t["file_path"] != file_path:
             continue
@@ -63,6 +86,7 @@ def _get_theorems_from_files(
             t["full_name"].encode()
         ).hexdigest().startswith(name_filter):
             continue
+        
         repo = LeanGitRepo(t["url"], t["commit"])
         theorems.append(Theorem(repo, t["file_path"], t["full_name"]))
         positions.append(Pos(*t["start"]))
@@ -77,11 +101,13 @@ def _get_theorems_from_files(
     theorems, positions = zip(*theorems_and_positions)
     theorems, positions = list(theorems), list(positions)
 
+    # Limit the number of theorems if specified
     if num_theorems is not None:
         theorems = theorems[:num_theorems]
         positions = positions[:num_theorems]
     logger.info(f"{len(theorems)} theorems loaded from {data_path}")
 
+    # Load repository metadata
     metadata = json.load(open(os.path.join(data_path, "../metadata.json")))
     repo = LeanGitRepo(metadata["from_repo"]["url"], metadata["from_repo"]["commit"])
 
@@ -106,6 +132,12 @@ def evaluate(
     num_gpus: int = 0,
     verbose: bool = False,
 ) -> float:
+    """
+    Evaluates the prover on the specified theorems.
+
+    Returns:
+        float: The pass@1 metric (proportion of proved theorems).
+    """
     set_logger(verbose)
 
     repo, theorems, positions = _get_theorems(
@@ -157,6 +189,9 @@ def evaluate(
 
 
 def main() -> None:
+    """
+    The main function that parses command-line arguments and runs the evaluation.
+    """
     parser = argparse.ArgumentParser(
         description="Script for evaluating the prover on theorems extracted by LeanDojo."
     )
