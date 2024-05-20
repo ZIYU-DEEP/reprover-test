@@ -54,3 +54,23 @@ export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goa
 export tactic_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt'
 export default_path='/home/ubuntu/dojo/github/reprover-test/leandojo-pl-ckpts/generator_random.ckpt'
 
+
+CUDA_VISIBLE_DEVICES=0 python prover/evaluate.py \
+    --data-path data/leandojo_benchmark_4/random/ \
+    --split test \
+    --num-workers 5 \
+    --num-gpus 1 \
+    --num-theorems 1 \
+    --ckpt_path $joint_ckpt_path \
+    --gen-type joint \
+    --start-ind 10
+
+CUDA_VISIBLE_DEVICES=0 python prover/evaluate.py \
+    --data-path data/leandojo_benchmark_4/random/ \
+    --split test \
+    --num-workers 5 \
+    --num-gpus 1 \
+    --num-theorems 1 \
+    --ckpt_path $tactic_ckpt_path \
+    --gen-type goal_driven_tactic \
+    --start-ind 10
