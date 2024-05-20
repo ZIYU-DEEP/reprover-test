@@ -33,7 +33,10 @@ class Node(ABC):
     @property
     @abstractmethod
     def distance_to_proof(self) -> int:
-        "The smallest number of steps to a proof."
+        '''
+        The smallest number of steps to a proof.
+        0 for ProofFinishedNode, math.inf for ErrorNode.
+        '''
         raise NotImplementedError
 
     @property
