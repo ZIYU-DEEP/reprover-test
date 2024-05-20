@@ -103,7 +103,7 @@ class BestFirstSearchProver:
                 self.dojo = dojo
                 self.root = InternalNode(
                     state=init_state,
-                    cumulative_logprob=0.0,
+                    cumulative_logprob=0.0,  # initialize the logprob
                 )
                 self.nodes = {init_state: self.root}
                 self.priority_queue = [self.root]
@@ -186,10 +186,13 @@ class BestFirstSearchProver:
                 search_node.priority >= node.priority for node in self.priority_queue
             )
 
+        # Get the tactic state
         if isinstance(search_node.state, TacticState):
             ts = search_node.state.pp
         else:
             ts = search_node.state.unsolved_tactic_state
+        
+        # Feed the tactic state into model and get results
         suggestions = self._generate_tactics(ts)
 
         # Try all tactics in order of descending logprob, and collect the results. Any
@@ -216,10 +219,14 @@ class BestFirstSearchProver:
             self.check_invariants()
 
     def _generate_tactics(self, ts: str) -> List[Tuple[str, float]]:
+        
+        # Record the time
         t0 = time.monotonic()
 
+        # Get the file path of the theorem
         path = str(self.theorem.file_path)
 
+        # Set up the repo
         if self.theorem.repo != self.repo:
             path = self.theorem.repo.get_packages_dir() / self.theorem.repo.name / path
         
@@ -253,30 +260,40 @@ class BestFirstSearchProver:
     def _run_tactic(
         self, node: InternalNode, tactic: str, logprob: float
     ) -> Tuple[Edge, bool]:
+        
+        # Get the current time
         t0 = time.monotonic()
+        
+        # Use LeanDojo to get response
         response = self.dojo.run_tac(node.state, tactic)
 
+        # Record the time
         elapsed = time.monotonic() - t0
         self.environment_time += elapsed
 
+        # ---------------------------------------------------------------
+        # Set the result node
         try:
             # If we've seen this response before, use the existing node
             result_node = self.nodes[response]
+            
         except KeyError:
             # Build a new node
             if isinstance(response, ProofFinished):
                 result_node = ProofFinishedNode(response)
+                
             elif type(response) in (
                 LeanError,
                 TimeoutError,
                 ProofGivenUp,
             ):
                 result_node = ErrorNode(response)
+                
             else:
                 assert isinstance(response, TacticState)
                 result_node = InternalNode(
                     state=response,
-                    cumulative_logprob=logprob + node.cumulative_logprob,
+                    cumulative_logprob=logprob + node.cumulative_logprob,  # Add up the prob
                 )
 
             if result_node.status == Status.OPEN:  # Don't search proved/failed nodes
@@ -284,10 +301,15 @@ class BestFirstSearchProver:
 
         # Record the new node and add it to the search queue.
         self.nodes[response] = result_node
+        # ---------------------------------------------------------------
 
+        # ---------------------------------------------------------------
         # Build an edge connecting these nodes.
         # Will be added to the source node externally.
-        edge = Edge(tactic=tactic, src=node, dst=result_node)
+        edge = Edge(tactic=tactic, 
+                    src=node, 
+                    dst=result_node)
+        # ---------------------------------------------------------------
 
         if isinstance(result_node, InternalNode):
             result_node.in_edges.append(edge)
