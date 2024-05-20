@@ -537,3 +537,31 @@ def cpu_checkpointing_enabled(pl_module) -> bool:
         )
     except RuntimeError:
         return False
+    
+    
+
+# -------------------------------------------
+# RiR related functions
+def format_goal_driven_tactic_input(ts, ts_) -> str:
+    """Format the input for gen_type=goal_driven_tactic."""
+    return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n{ts_}\n[PROOFSTEP]\n"
+
+def format_goal_input(ts) -> str:
+    """Format the input for gen_type=goal"""
+    return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n"
+
+def format_joint_input(ts) -> str:
+    """Format the input for gen_type=joint"""
+    return f"[CURRENT GOAL]\n{ts}\n"
+
+def format_goal_driven_tactic_output(output) -> str:
+    """Format the output for gen_type=goal_driven_tactic."""
+    return output
+
+def format_goal_output(output) -> str:
+    """Format the output for gen_type=goal."""
+    return output
+
+def format_joint_output(output) -> str:
+    """Format the output for gen_type=joint."""
+    return output.split('[PROOFSTEP]\n')[-1].strip()

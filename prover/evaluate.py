@@ -151,6 +151,7 @@ def evaluate(
     num_gpus: int = 0,
     verbose: bool = False,
     start_ind: int = 0,
+    gen_type: str = 'default',
 ) -> float:
     """
     Evaluates the prover on the specified theorems.
@@ -181,6 +182,7 @@ def evaluate(
         timeout=timeout,
         num_sampled_tactics=num_sampled_tactics,
         debug=verbose,
+        gen_type=gen_type,
     )
     results = prover.search_unordered(repo, theorems, positions)
 
@@ -275,6 +277,9 @@ def main() -> None:
     
     # New arguments added by neurips ddl
     parser.add_argument("--start-ind", type=int, default=0, help="The starting index of theorems to evaluate.")
+    parser.add_argument("--gen-type", type=str, default='default',
+                        choices=['default', 'goal_driven_tactic', 'goal', 'joint'],
+                        help="The type for the generator.")
 
     args = parser.parse_args()
 
@@ -302,6 +307,7 @@ def main() -> None:
         args.num_gpus,
         args.verbose,
         args.start_ind,
+        args.gen_type,
     )
 
     logger.info(f"Pass@1: {pass_1}")

@@ -68,6 +68,7 @@ class BestFirstSearchProver:
         self.environment_time = 0.0
         self.total_time = None
         
+        # Add goal gen
         self.goal_gen = goal_gen
 
     def search(
@@ -187,16 +188,33 @@ class BestFirstSearchProver:
             ts = search_node.state.pp
         else:
             ts = search_node.state.unsolved_tactic_state
-        suggestions = self._generate_tactics(ts)
+            
+            
+        # ----------------------------------------------------------------------------
+        # Sample candidate goal states
+        candidate_goals = self._sample_target_goals(ts)
 
-        # Try all tactics in order of descending logprob, and collect the results. Any
-        # new nodes are added to `self.nodes`, and edges are added to the result node.
-        results = []
-        for tactic, logprob in suggestions:
-            edge, finished = self._run_tactic(search_node, tactic, logprob)
-            results.append(edge)
-            if finished:
-                break
+        results = []  # Initialize results list
+        for goal_state in candidate_goals:
+            # Sample candidate tactics for each goal state
+            suggestions = self._generate_tactics(ts, goal_state)
+
+            for tactic, logprob in suggestions:
+                edge, finished = self._run_tactic(search_node, tactic, logprob)
+                results.append(edge)
+                if finished:
+                    break
+        # ----------------------------------------------------------------------------
+        # suggestions = self._generate_tactics(ts)
+
+        # # Try all tactics in order of descending logprob, and collect the results. Any
+        # # new nodes are added to `self.nodes`, and edges are added to the result node.
+        # results = []
+        # for tactic, logprob in suggestions:
+        #     edge, finished = self._run_tactic(search_node, tactic, logprob)
+        #     results.append(edge)
+        #     if finished:
+        #         break
 
         # Store the fixed out edges of this node, marking it as explored.
         # This will trigger recursively recomputing tree statistics.
@@ -211,6 +229,14 @@ class BestFirstSearchProver:
                 if isinstance(node, InternalNode)
             )
             self.check_invariants()
+    
+    def _sample_target_goals(self, ts: str) -> List[str]:
+        # Use the goal generator to sample candidate goal states
+        candidate_goals = self.goal_gen.generate(
+            inputs=format_goal_input(ts),
+            num_samples=self.num_sampled_goals,
+        )
+        return [formal_goal_output(goal) for goal, _ in candidate_goals]
 
     def _generate_tactics(self, ts: str) -> List[Tuple[str, float]]:
         t0 = time.monotonic()
