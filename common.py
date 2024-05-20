@@ -542,26 +542,82 @@ def cpu_checkpointing_enabled(pl_module) -> bool:
 
 # -------------------------------------------
 # RiR related functions
-def format_goal_driven_tactic_input(ts, ts_) -> str:
-    """Format the input for gen_type=goal_driven_tactic."""
-    return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n{ts_}\n[PROOFSTEP]\n"
+# def format_default_input(ts) -> str:
+#     return ts
 
-def format_goal_input(ts) -> str:
-    """Format the input for gen_type=goal"""
-    return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n"
+# def format_default_output(output) -> str:
+#     return output
 
-def format_joint_input(ts) -> str:
-    """Format the input for gen_type=joint"""
-    return f"[CURRENT GOAL]\n{ts}\n"
+# def format_goal_driven_tactic_input(ts, ts_) -> str:
+#     """Format the input for gen_type=goal_driven_tactic."""
+#     return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n{ts_}\n[PROOFSTEP]\n"
 
-def format_goal_driven_tactic_output(output) -> str:
-    """Format the output for gen_type=goal_driven_tactic."""
-    return output
+# def format_goal_input(ts) -> str:
+#     """Format the input for gen_type=goal"""
+#     return f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n"
 
-def format_goal_output(output) -> str:
-    """Format the output for gen_type=goal."""
-    return output
+# def format_joint_input(ts) -> str:
+#     """Format the input for gen_type=joint"""
+#     return f"[CURRENT GOAL]\n{ts}\n"
 
-def format_joint_output(output) -> str:
-    """Format the output for gen_type=joint."""
-    return output.split('[PROOFSTEP]\n')[-1].strip()
+# def format_goal_driven_tactic_output(output) -> str:
+#     """Format the output for gen_type=goal_driven_tactic."""
+#     return output
+
+# def format_goal_output(output) -> str:
+#     """Format the output for gen_type=goal."""
+#     return output
+
+# def format_joint_output(output) -> str:
+#     """Format the output for gen_type=joint."""
+#     return output.split('[PROOFSTEP]\n')[-1].strip()
+
+def format_input(ts: str, ts_: str='no goals', gen_type='default') -> str:
+    """
+    Format the input based on the generation type.
+    """
+    formats = {
+        'default': 
+            lambda ts, ts_: ts,
+            
+        'goal_driven_tactic': 
+            lambda ts, ts_: f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n{ts_}\n[PROOFSTEP]\n",
+            
+        'goal': 
+            lambda ts, ts_: f"[CURRENT GOAL]\n{ts}\n[TARGET GOAL]\n",
+            
+        'joint': 
+            lambda ts, ts_: f"[CURRENT GOAL]\n{ts}\n"
+    }
+    
+    return formats.get(gen_type, formats['default'])(ts, ts_)
+
+
+def format_output(output: str, gen_type: str='default') -> str:
+    """
+    Format the output based on the generation type.
+    """
+    formats = {
+        'default': 
+            lambda output: output,  # the next tactic
+            
+        'goal_driven_tactic': 
+            lambda output: output,   # the next tacitc
+            
+        'goal': 
+            lambda output: output,  # the target goal
+            
+        'joint': 
+            # For now, extract only the tactic from the output
+            lambda output: output.split('[PROOFSTEP]\n')[-1].strip()  
+    }
+    return formats.get(gen_type, formats['default'])(output)
+
+
+def format_suggestions(suggestions, gen_type='default'):
+    """
+    Format the suggestions using format_output for the given generation type.
+    """
+    return [(format_output(suggestion[0], gen_type), suggestion[1]) 
+            for suggestion in suggestions]
+

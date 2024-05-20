@@ -27,6 +27,7 @@ from typing import List, Optional, Tuple
 from ray.util.actor_pool import ActorPool
 
 from common import zip_strict
+from common import format_input, format_output, format_suggestions
 from prover.search_tree import *
 from generator.model import RetrievalAugmentedGenerator, FixedTacticGenerator
 
@@ -56,7 +57,9 @@ class BestFirstSearchProver:
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
+        gen_type: str = "default",
     ) -> None:
+        
         self.tac_gen = tac_gen
         self.timeout = timeout
         self.num_sampled_tactics = num_sampled_tactics
@@ -66,6 +69,9 @@ class BestFirstSearchProver:
         self.actor_time = 0.0
         self.environment_time = 0.0
         self.total_time = None
+        
+        # RiR related 
+        self.gen_type = gen_type
 
     def search(
         self, repo: LeanGitRepo, thm: Theorem, pos: Pos
@@ -216,15 +222,29 @@ class BestFirstSearchProver:
 
         if self.theorem.repo != self.repo:
             path = self.theorem.repo.get_packages_dir() / self.theorem.repo.name / path
+        
+        # ------------------------------------------------
+        # Format ts for RiR
+        # TODO: GOAL_DRIVEN_TACTIC IS NOT HERE WHICH NEED ts_
+        ts = format_input(ts=ts, 
+                          gen_type=self.gen_type)
+        # ------------------------------------------------
 
         suggestions = self.tac_gen.generate(
-            inputs=ts,  # TODO: NEED TO MODIFY THIS TO ADAP DIFFERENT INPUT PATTERNS
+            inputs=ts, 
             file_path=path,
             theorem_full_name=self.theorem.full_name,
             theorem_pos=self.posision,
             num_samples=self.num_sampled_tactics,
         )
-
+        
+        # ------------------------------------------------
+        # Format suggestions for RiR
+        suggestions = format_suggestions(
+            suggestions=suggestions,
+            gen_type=self.gen_type)
+        # ------------------------------------------------
+        
         self.actor_time += time.monotonic() - t0
 
         logger.debug(f"Tactic suggestions: {suggestions}")
@@ -321,6 +341,7 @@ class CpuProver(BestFirstSearchProver):
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
+        gen_type: str="default",
     ) -> None:
         if ckpt_path is None:
             tac_gen = FixedTacticGenerator(tactic, module)
@@ -328,7 +349,8 @@ class CpuProver(BestFirstSearchProver):
             tac_gen = RetrievalAugmentedGenerator.load(
                 ckpt_path=ckpt_path, 
                 device=torch.device("cpu"), 
-                freeze=True
+                freeze=True,
+                gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -339,6 +361,7 @@ class CpuProver(BestFirstSearchProver):
             timeout,
             num_sampled_tactics,
             debug,
+            gen_type,
         )
 
 
@@ -355,6 +378,7 @@ class GpuProver(BestFirstSearchProver):
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
+        gen_type: str="default",
     ) -> None:
         if ckpt_path is None:
             tac_gen = FixedTacticGenerator(tactic, module)
@@ -362,7 +386,8 @@ class GpuProver(BestFirstSearchProver):
             tac_gen = RetrievalAugmentedGenerator.load(
                 ckpt_path=ckpt_path, 
                 device=torch.device("cuda"), 
-                freeze=True
+                freeze=True,
+                gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -373,6 +398,7 @@ class GpuProver(BestFirstSearchProver):
             timeout,
             num_sampled_tactics,
             debug,
+            gen_type,
         )
 
 
@@ -394,6 +420,7 @@ class DistributedProver:
         timeout: int,
         num_sampled_tactics: int,
         debug: Optional[bool] = False,
+        gen_type: str="default",
     ) -> None:
         if ckpt_path is None:
             assert tactic and not indexed_corpus_path
@@ -411,16 +438,19 @@ class DistributedProver:
                 tac_gen = RetrievalAugmentedGenerator.load(
                     ckpt_path=ckpt_path, 
                     device=device, 
-                    freeze=True
+                    freeze=True,
+                    gen_type=gen_type,  # adding gen_type for RiR
                 )
                 if tac_gen.retriever is not None:
                     assert indexed_corpus_path is not None
                     tac_gen.retriever.load_corpus(indexed_corpus_path)
+                    
             self.prover = BestFirstSearchProver(
                 tac_gen=tac_gen, 
                 timeout=timeout, 
                 num_sampled_tactics=num_sampled_tactics, 
-                debug=debug
+                debug=debug,
+                gen_type=gen_type,  # Add gen_type for RiR
             )
             return
 
@@ -436,6 +466,7 @@ class DistributedProver:
                     timeout=timeout,
                     num_sampled_tactics=num_sampled_tactics,
                     debug=debug,
+                    gen_type=gen_type,  # Add gen_type for RiR
                 )
                 for _ in range(num_workers)
             ]
@@ -450,6 +481,7 @@ class DistributedProver:
                     timeout=timeout,
                     num_sampled_tactics=num_sampled_tactics,
                     debug=debug,
+                    gen_type=gen_type,  
                 )
                 for _ in range(num_workers)
             ]
