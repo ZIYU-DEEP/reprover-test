@@ -372,7 +372,7 @@ class CpuProver(BestFirstSearchProver):
                 ckpt_path=ckpt_path, 
                 device=torch.device("cpu"), 
                 freeze=True,
-                gen_type=gen_type,  # adding gen_type for RiR
+                # gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -409,7 +409,7 @@ class GpuProver(BestFirstSearchProver):
                 ckpt_path=ckpt_path, 
                 device=torch.device("cuda"), 
                 freeze=True,
-                gen_type=gen_type,  # adding gen_type for RiR
+                # gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
@@ -461,7 +461,7 @@ class DistributedProver:
                     ckpt_path=ckpt_path, 
                     device=device, 
                     freeze=True,
-                    gen_type=gen_type,  # adding gen_type for RiR
+                    # gen_type=gen_type,  # adding gen_type for RiR
                 )
                 if tac_gen.retriever is not None:
                     assert indexed_corpus_path is not None
