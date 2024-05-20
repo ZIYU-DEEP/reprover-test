@@ -159,7 +159,7 @@ def evaluate(
     Returns:
         float: The pass@1 metric (proportion of proved theorems).
     """
-    set_logger(verbose)
+    # set_logger(verbose)
 
     repo, theorems, positions = _get_theorems(
         data_path=data_path, 
@@ -208,8 +208,8 @@ def evaluate(
     # Save the results.
     if exp_id is None:
         exp_id = str(uuid.uuid4())
-    os.makedirs("./results", exist_ok=True)
-    pickle_path = f"./results/{exp_id}_results.pickle"
+    os.makedirs(f"./results/{gen_type}", exist_ok=True)
+    pickle_path = f"./results/{gen_type}/{exp_id}_results.pickle"
     pickle.dump(results, open(pickle_path, "wb"))
     logger.info(f"Results saved to {pickle_path}")
 
@@ -282,6 +282,7 @@ def main() -> None:
                         help="The type for the generator.")
 
     args = parser.parse_args()
+    set_logger(args.verbose)
 
     assert args.ckpt_path or args.tactic
     assert args.num_gpus <= args.num_workers

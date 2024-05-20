@@ -26,10 +26,26 @@ from dataclasses import dataclass
 from typing import List, Optional, Tuple
 from ray.util.actor_pool import ActorPool
 
-from common import zip_strict
+from common import zip_strict, set_logger
 from common import format_input, format_output, format_suggestions
 from prover.search_tree import *
 from generator.model import RetrievalAugmentedGenerator, FixedTacticGenerator
+
+
+# @dataclass(frozen=True)
+# class SearchResult:
+#     """The result of attempting to prove a theorem."""
+
+#     theorem: Theorem
+#     status: Status
+#     proof: Optional[List[str]]
+
+#     # Some statistics during proof search.
+#     actor_time: float
+#     environment_time: float
+#     total_time: float
+#     num_total_nodes: int
+#     num_searched_nodes: int
 
 
 @dataclass(frozen=True)
@@ -39,13 +55,26 @@ class SearchResult:
     theorem: Theorem
     status: Status
     proof: Optional[List[str]]
-
+    
     # Some statistics during proof search.
     actor_time: float
     environment_time: float
     total_time: float
     num_total_nodes: int
     num_searched_nodes: int
+    
+    def __repr__(self):
+        theorem_info = f"Theorem:\n  Repository: {self.theorem.repo}\n  File Path: {self.theorem.file_path}\n  Full Name: {self.theorem.full_name}"
+        status_info = f"Status: {self.status}"
+        
+        if self.proof:
+            proof_info = "Proof:\n  " + "\n  ".join(self.proof)
+        else:
+            proof_info = "Proof: None"
+        
+        statistics_info = f"Search Statistics:\n  Actor Time: {self.actor_time}\n  Environment Time: {self.environment_time}\n  Total Time: {self.total_time}\n  Total Nodes: {self.num_total_nodes}\n  Searched Nodes: {self.num_searched_nodes}"
+        
+        return f"Search Result:\n\n{theorem_info}\n\n{status_info}\n\n{proof_info}\n\n{statistics_info}"
 
 
 class BestFirstSearchProver:
@@ -72,6 +101,11 @@ class BestFirstSearchProver:
         
         # RiR related 
         self.gen_type = gen_type
+        
+        # Set the logger (will be saved in a seprate folder)
+        set_logger(verbose=self.debug, suffix=self.gen_type)
+        logger.info(f"Using gen_type: {self.gen_type}.")
+        
 
     def search(
         self, repo: LeanGitRepo, thm: Theorem, pos: Pos
@@ -134,6 +168,7 @@ class BestFirstSearchProver:
                 num_searched_nodes=self.num_expansions,
             )
             logger.info(result)
+            logger.info("\n---------------------------------\n")
             return result
 
         except DojoInitError as ex:
