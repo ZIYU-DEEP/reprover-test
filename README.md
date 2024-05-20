@@ -336,10 +336,20 @@ source $HOME/.elan/env
 ```
 
 ### Notes on deepspeed
+Depending on your server, you may optionally set:
 ```
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 export CPATH=/usr/local/cuda/include:$CPATH
+```
+These warnings can be safely ignored:
+```
+[WARNING]  async_io requires the dev libaio .so object and headers but these were not found. [repeated 4x across cluster]
+[WARNING]  async_io: please install the libaio-dev package with apt [repeated 4x across cluster]
+[WARNING]  If libaio is already installed (perhaps from source), try setting the CFLAGS and LDFLAGS environment variables to where it can be found. [repeated 4x across cluster]
+[WARNING]  Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH [repeated 4x across cluster]
+[WARNING]  sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.3 [repeated 4x across cluster]
+[WARNING]  using untested triton version (2.3.0), only 1.0.0 is known to be compatible [repeated 4x across cluster]
 ```
 
 
@@ -377,5 +387,4 @@ git lfs fetch --all
 - [x] Check wandb or tensorboard.
 
 
-### Notes on setting up on Lambda AI
 
