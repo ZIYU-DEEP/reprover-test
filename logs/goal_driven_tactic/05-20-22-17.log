@@ -1,0 +1,97 @@
+2024-05-20 22:17:50.180 | INFO     | prover.proof_search:search:112 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/Principal.lean'), full_name='Ordinal.mul_omega')
+2024-05-20 22:17:50.197 | INFO     | prover.proof_search:search:112 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/Reflection.lean'), full_name='Module.preReflection_preReflection')
+2024-05-20 22:17:50.227 | INFO     | prover.proof_search:search:112 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/ConditionallyCompleteLattice/Basic.lean'), full_name='OrderIso.map_ciSup')
+2024-05-20 22:17:50.413 | INFO     | prover.proof_search:search:112 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean'), full_name='MeasureTheory.Lp.simpleFunc.toLp_add')
+2024-05-20 22:17:50.534 | INFO     | prover.proof_search:search:112 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Bounds/Basic.lean'), full_name='not_bddBelow_iff')
+2024-05-20 22:18:47.199 | INFO     | prover.proof_search:_best_first_search:202 - Found a proof!
+2024-05-20 22:18:52.275 | INFO     | prover.proof_search:_best_first_search:181 - Ran out of nodes to search.
+2024-05-20 22:18:56.294 | INFO     | prover.proof_search:_best_first_search:202 - Found a proof!
+2024-05-20 22:18:57.770 | INFO     | prover.proof_search:_best_first_search:181 - Ran out of nodes to search.
+2024-05-20 22:19:02.795 | INFO     | prover.proof_search:search:169 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/Bounds/Basic.lean
+  Full Name: not_bddBelow_iff
+
+Status: Status.PROVED
+
+Proof:
+  simp [bddBelow_def]
+
+Search Statistics:
+  Actor Time: 6.411228954006219
+  Environment Time: 0.20647676702355966
+  Total Time: 6.618215077003697
+  Total Nodes: 3
+  Searched Nodes: 1
+2024-05-20 22:19:11.367 | INFO     | prover.proof_search:search:169 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/SetTheory/Ordinal/Principal.lean
+  Full Name: Ordinal.mul_omega
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 10.22377354800119
+  Environment Time: 1.3668778779101558
+  Total Time: 11.593620672996622
+  Total Nodes: 127
+  Searched Nodes: 3
+2024-05-20 22:19:13.897 | INFO     | prover.proof_search:search:169 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean
+  Full Name: MeasureTheory.Lp.simpleFunc.toLp_add
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Actor Time: 6.232277278992115
+  Environment Time: 0.0794820909795817
+  Total Time: 6.312605726998299
+  Total Nodes: 4
+  Searched Nodes: 1
+2024-05-20 22:19:15.080 | INFO     | prover.proof_search:search:169 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/ConditionallyCompleteLattice/Basic.lean
+  Full Name: OrderIso.map_ciSup
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 10.640991675056284
+  Environment Time: 0.9887613211467396
+  Total Time: 11.63258045501425
+  Total Nodes: 95
+  Searched Nodes: 3
+2024-05-20 22:29:39.810 | INFO     | prover.proof_search:_best_first_search:194 - Search timed out.
+2024-05-20 22:29:51.496 | INFO     | prover.proof_search:search:169 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/LinearAlgebra/Reflection.lean
+  Full Name: Module.preReflection_preReflection
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 146.47380559207522
+  Environment Time: 165.78968893791898
+  Total Time: 659.9984334979963
+  Total Nodes: 428
+  Searched Nodes: 19

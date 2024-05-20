@@ -140,3 +140,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Unignore .log files in the specified directories
+!logs/goal_driven_tactic/*.log
+!logs/default/*.log
+!logs/goal/*.log
+!logs/joint/*.log
+
+# Ensure the specific directories are not ignored
+!logs/
+!logs/goal_driven_tactic/
+!logs/default/
+!logs/goal/
+!logs/joint/

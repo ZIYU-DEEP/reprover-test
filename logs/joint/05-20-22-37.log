@@ -1,0 +1,23 @@
+2024-05-20 22:37:59.842 | INFO     | prover.proof_search:__init__:107 - Using gen_type: joint.
+2024-05-20 22:37:59.849 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/ConditionallyCompleteLattice/Basic.lean'), full_name='OrderIso.map_ciSup')
+2024-05-20 22:42:31.313 | INFO     | prover.proof_search:_best_first_search:183 - Ran out of nodes to search.
+2024-05-20 22:42:43.012 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/ConditionallyCompleteLattice/Basic.lean
+  Full Name: OrderIso.map_ciSup
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 211.87264223600505
+  Environment Time: 2.6864421236969065
+  Total Time: 214.5707938289852
+  Total Nodes: 200
+  Searched Nodes: 7
+2024-05-20 22:42:43.013 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+

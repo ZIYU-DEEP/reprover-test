@@ -501,7 +501,7 @@ def zip_strict(*args):
 #         logger.add(sys.stderr, level="INFO")
 
 
-def set_logger(verbose: bool) -> None:
+def set_logger(verbose: bool, suffix: str=None) -> None:
     """
     Set the logging level of loguru and save logs to a dynamically named file within the 'logs' directory,
     based on the current datetime.
@@ -511,12 +511,17 @@ def set_logger(verbose: bool) -> None:
         verbose (bool): If True, set logging level to DEBUG, otherwise set to INFO.
     """
     # Create the path to save the log
-    os.makedirs('./logs', exist_ok=True)
+    if not suffix: 
+        log_path = './logs'
+    else: 
+        log_path = f'./logs/{suffix}'
+    
+    os.makedirs(log_path, exist_ok=True)
     time_now = datetime.now().strftime('%m-%d-%H-%M')
-    log_path = f'./logs/{time_now}.log'
+    log_path = f'{log_path}/{time_now}.log'
 
-    # Remove existing handlers
-    logger.remove() 
+    # # Remove existing handlers
+    # logger.remove() 
 
     # Set logging level based on verbose flag
     level = "DEBUG" if verbose else "INFO"
@@ -524,6 +529,9 @@ def set_logger(verbose: bool) -> None:
 
     # Add a file handler with the appropriate logging level
     logger.add(log_path, level=level, backtrace=True, diagnose=True)
+
+    # Set logger level explicitly to ensure all handlers respect this level
+    logger.level(level)
 
 
 
