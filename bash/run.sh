@@ -47,3 +47,10 @@ CUDA_VISIBLE_DEVICES=0 python prover/evaluate.py \
     --num-workers 5 \
     --num-gpus 1 \
     --num-theorems 1
+
+# Exporting the variables
+export joint_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/joint_ckpt/reprover-joint/s3upj4dw/checkpoints/checkpoint-epoch=00-step=10000-loss_val=1000.0000-loss_train=0.2334.ckpt'
+export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal/reprover-goal/lkiucv18/checkpoints/checkpoint-epoch=00-step=300-loss_val=0.0000-loss_train=0.1045-timestamp=0.ckpt'
+export tactic_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt'
+export default_path='/home/ubuntu/dojo/github/reprover-test/leandojo-pl-ckpts/generator_random.ckpt'
+
