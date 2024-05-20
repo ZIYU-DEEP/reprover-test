@@ -73,6 +73,15 @@ def _get_theorems_from_files(
 ) -> Tuple[LeanGitRepo, List[Theorem], List[Pos]]:
     """
     Helper function for _get_theorems.
+    
+    Returns:
+        Tuple[LeanGitRepo, List[Theorem], List[Pos]]: 
+            A tuple containing the repository, 
+                               list of theorems, 
+                               and list of positions.
+                               
+        The positions is used in model.PremiseRetriever.retrive 
+        to provide the context for retrieving the premises.
     """
     # Load theorems from JSON file
     data = json.load(open(os.path.join(data_path, f"{split}.json")))

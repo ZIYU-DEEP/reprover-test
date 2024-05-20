@@ -1,4 +1,5 @@
-"""Proof search using best-first search.
+"""
+Proof search using bi-level goal-driven best-first search.
 """
 
 import os

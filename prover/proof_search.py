@@ -85,10 +85,15 @@ class BestFirstSearchProver:
             imps = []
 
         try:
+            # ----------------------------------------------------------------------------
+            # Init the Dojo environment
             with Dojo(thm, hard_timeout=60 + self.timeout, additional_imports=imps) as (
                 dojo,
                 init_state,
             ):
+            # ----------------------------------------------------------------------------
+
+                # Initialize dojo, nodes, and the priority queue
                 self.dojo = dojo
                 self.root = InternalNode(
                     state=init_state,
@@ -97,18 +102,21 @@ class BestFirstSearchProver:
                 self.nodes = {init_state: self.root}
                 self.priority_queue = [self.root]
 
+                # Do best-first search
                 with torch.no_grad():
                     try:
                         self._best_first_search()
                     except DojoCrashError as ex:
                         logger.warning(f"Dojo crashed with {ex} when proving {thm}")
                         pass
-
+            
+            # Extract the proof
             if self.root.status == Status.PROVED:
                 proof = [e.tactic for e in self.root.extract_proof()]
             else:
                 proof = None
 
+            # Record the search result
             result = SearchResult(
                 theorem=thm,
                 status=self.root.status,
