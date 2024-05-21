@@ -488,10 +488,9 @@ class CpuProver(BestFirstSearchProver):
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
-        gen_type: str="default",
+        gen_type: str="goal_driven_tactic",
         goal_ckpt_path: Optional[str] = None,  # added for rir
         num_sampled_goals: int = 10,  # added for rir
-        
     ) -> None:
         # ----------------------------------------------------------------------
         # SETUP THE TAC_GEN
@@ -551,8 +550,13 @@ class GpuProver(BestFirstSearchProver):
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
-        gen_type: str="default",
+        gen_type: str="goal_driven_tactic",
+        goal_ckpt_path: Optional[str] = None,  # added for rir
+        num_sampled_goals: int = 10,  # added for rir
     ) -> None:
+
+        # ----------------------------------------------------------------------
+        # SETUP THE TAC_GEN
         if ckpt_path is None:
             tac_gen = FixedTacticGenerator(tactic, module)
         else:
@@ -560,18 +564,39 @@ class GpuProver(BestFirstSearchProver):
                 ckpt_path=ckpt_path, 
                 device=torch.device("cuda"), 
                 freeze=True,
-                # gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
                     tac_gen.retriever.load_corpus(indexed_corpus_path)
                 tac_gen.retriever.reindex_corpus(batch_size=32)
+        # ----------------------------------------------------------------------
+        
+        # ----------------------------------------------------------------------
+        # SETUP THE GOAL_GEN
+        if goal_ckpt_path is None:
+            goal_gen = FixedTacticGenerator(tactic, module)  # TODO: add FixedGoalGenerator
+        else:
+            goal_gen = RetrievalAugmentedGenerator.load(
+                ckpt_path=goal_ckpt_path, 
+                device=torch.device("cuda"), 
+                freeze=True,
+            )
+            
+            # TODO: the below is unnecessary
+            if goal_gen.retriever is not None:
+                if indexed_corpus_path is not None:
+                    goal_gen.retriever.load_corpus(indexed_corpus_path)
+                goal_gen.retriever.reindex_corpus(batch_size=32)
+        # ----------------------------------------------------------------------
+        
         super().__init__(
             tac_gen,
             timeout,
             num_sampled_tactics,
             debug,
             gen_type,
+            goal_gen,  # added for rir
+            num_sampled_goals,  # added for rir
         )
 
 
@@ -593,15 +618,24 @@ class DistributedProver:
         timeout: int,
         num_sampled_tactics: int,
         debug: Optional[bool] = False,
-        gen_type: str="default",
+        gen_type: str="goal_driven_tactic",
+        goal_ckpt_path: Optional[str] = None,  # added for rir
+        num_sampled_goals: int = 10,  # added for rir
     ) -> None:
+        
+        # --------------------------------------------------
         if ckpt_path is None:
             assert tactic and not indexed_corpus_path
         else:
             assert not tactic and not module
+        # --------------------------------------------------
+        
         self.distributed = num_workers > 1
 
         if not self.distributed:
+            
+            # ------------------------------------------------------------------------
+            # TAC_GEN
             if ckpt_path is None:
                 tac_gen = FixedTacticGenerator(
                     tactic=tactic, 
@@ -617,6 +651,26 @@ class DistributedProver:
                 if tac_gen.retriever is not None:
                     assert indexed_corpus_path is not None
                     tac_gen.retriever.load_corpus(indexed_corpus_path)
+             # ------------------------------------------------------------------------
+             
+            # ------------------------------------------------------------------------
+            # TAC_GEN
+            if goal_ckpt_path is None:
+                goal_gen = FixedTacticGenerator(  # TODO
+                    tactic=tactic, 
+                    module=module)
+            else:
+                device = torch.device("cuda") if num_gpus > 0 else torch.device("cpu")
+                goal_gen = RetrievalAugmentedGenerator.load(
+                    ckpt_path=goal_ckpt_path, 
+                    device=device, 
+                    freeze=True,
+                    # gen_type=gen_type,  # adding gen_type for RiR
+                )
+                if goal_gen.retriever is not None:
+                    assert indexed_corpus_path is not None
+                    goal_gen.retriever.load_corpus(indexed_corpus_path)
+             # ------------------------------------------------------------------------ 
                     
             self.prover = BestFirstSearchProver(
                 tac_gen=tac_gen, 
@@ -624,6 +678,8 @@ class DistributedProver:
                 num_sampled_tactics=num_sampled_tactics, 
                 debug=debug,
                 gen_type=gen_type,  # Add gen_type for RiR
+                goal_ckpt_path=goal_ckpt_path,  # added for rir
+                num_sampled_goals=num_sampled_goals,
             )
             return
 
@@ -640,6 +696,8 @@ class DistributedProver:
                     num_sampled_tactics=num_sampled_tactics,
                     debug=debug,
                     gen_type=gen_type,  # Add gen_type for RiR
+                    goal_ckpt_path=goal_ckpt_path,  # added for rir
+                    num_sampled_goals=num_sampled_goals,
                 )
                 for _ in range(num_workers)
             ]
@@ -655,6 +713,8 @@ class DistributedProver:
                     num_sampled_tactics=num_sampled_tactics,
                     debug=debug,
                     gen_type=gen_type,  
+                    goal_ckpt_path=goal_ckpt_path,  # added for rir
+                    num_sampled_goals=num_sampled_goals,
                 )
                 for _ in range(num_workers)
             ]

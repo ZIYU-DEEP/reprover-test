@@ -1836,3 +1836,332 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 07:58:42.277 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Data/Fin/Tuple/Basic.lean'), full_name='Fin.forall_iff_succAbove')
+2024-05-21 07:59:07.445 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 07:59:28.239 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:00:20.265 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:00:22.775 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/CategoryTheory/Limits/Shapes/Pullbacks.lean
+  Full Name: CategoryTheory.Limits.hasPushout_assoc_symm
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 565.1532279000094
+  Environment Time: 37.962683757708874
+  Total Time: 603.2351538900111
+  Total Nodes: 2124
+  Searched Nodes: 63
+2024-05-21 08:00:22.776 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:00:22.785 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/Algebra/Subalgebra/Basic.lean'), full_name='Submodule.toSubalgebra_toSubmodule')
+2024-05-21 08:00:41.215 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/RingTheory/Coprime/Basic.lean
+  Full Name: isCoprime_mul_unit_right_right
+
+Status: Status.PROVED
+
+Proof:
+  rw [mul_comm, isCoprime_mul_unit_left_right hu]
+
+Search Statistics:
+  Actor Time: 5.942207822983619
+  Environment Time: 0.16684633493423462
+  Total Time: 6.110271553014172
+  Total Nodes: 25
+  Searched Nodes: 1
+2024-05-21 08:00:41.216 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:00:41.225 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Logic/Nonempty.lean'), full_name='Nonempty.elim_to_inhabited')
+2024-05-21 08:01:04.413 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:01:21.017 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Normed/Group/Pointwise.lean
+  Full Name: div_ball_one
+
+Status: Status.PROVED
+
+Proof:
+  simp [div_eq_mul_inv]
+  rw [mul_ball_one]
+
+Search Statistics:
+  Actor Time: 6.962173273030203
+  Environment Time: 0.5780361000797711
+  Total Time: 7.5429811389767565
+  Total Nodes: 57
+  Searched Nodes: 2
+2024-05-21 08:01:21.017 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:01:21.024 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/AffineSpace/Combination.lean'), full_name='Finset.affineCombinationSingleWeights_apply_self')
+2024-05-21 08:02:04.696 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Algebra/GroupWithZero/Basic.lean
+  Full Name: eq_zero_of_one_div_eq_zero
+
+Status: Status.PROVED
+
+Proof:
+  rw [← one_div_one_div a, h, div_zero]
+
+Search Statistics:
+  Actor Time: 3.579660970979603
+  Environment Time: 0.08590035498491488
+  Total Time: 3.6668287180073094
+  Total Nodes: 15
+  Searched Nodes: 1
+2024-05-21 08:02:04.698 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:02:04.706 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/RelSeries.lean'), full_name='RelSeries.length_le_length_longestOf')
+2024-05-21 08:03:23.660 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:04:10.576 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Algebra/Algebra/Subalgebra/Basic.lean
+  Full Name: Submodule.toSubalgebra_toSubmodule
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Actor Time: 3.1682412200025283
+  Environment Time: 0.020644141011871397
+  Total Time: 3.1893835049995687
+  Total Nodes: 4
+  Searched Nodes: 1
+2024-05-21 08:04:10.577 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:04:10.588 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Geometry/Manifold/ContMDiff/Defs.lean'), full_name='smooth_iff')
+2024-05-21 08:04:24.698 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:04:57.767 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:05:11.735 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:05:25.351 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/LinearAlgebra/AffineSpace/Combination.lean
+  Full Name: Finset.affineCombinationSingleWeights_apply_self
+
+Status: Status.PROVED
+
+Proof:
+  simp [Finset.affineCombinationSingleWeights]
+
+Search Statistics:
+  Actor Time: 12.516207573004067
+  Environment Time: 0.01537137699779123
+  Total Time: 12.532188479002798
+  Total Nodes: 3
+  Searched Nodes: 1
+2024-05-21 08:05:25.352 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:05:25.359 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/OmegaCompletePartialOrder.lean'), full_name="OmegaCompletePartialOrder.continuous'_coe")
+2024-05-21 08:05:57.521 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Logic/Nonempty.lean
+  Full Name: Nonempty.elim_to_inhabited
+
+Status: Status.PROVED
+
+Proof:
+  cases h
+  apply f
+  constructor
+  assumption
+
+Search Statistics:
+  Actor Time: 88.34001189601258
+  Environment Time: 1.93473135412205
+  Total Time: 90.30295106698759
+  Total Nodes: 526
+  Searched Nodes: 20
+2024-05-21 08:05:57.523 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:05:57.532 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Measure/MeasureSpace.lean'), full_name='MeasureTheory.Measure.AbsolutelyContinuous.smul')
+2024-05-21 08:06:06.181 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Instances/Matrix.lean
+  Full Name: Continuous.matrix_diagonal
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 515.8887810831075
+  Environment Time: 86.49283769808244
+  Total Time: 602.5708613980096
+  Total Nodes: 4185
+  Searched Nodes: 116
+2024-05-21 08:06:06.182 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:06:06.189 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/Star/Pointwise.lean'), full_name='Set.iUnion_star')
+2024-05-21 08:07:21.728 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:07:28.436 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:07:55.610 | WARNING  | prover.proof_search:search:175 - EOF
+2024-05-21 08:07:55.628 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean'), full_name='MeasureTheory.snormEssSup_mono_measure')
+2024-05-21 08:08:04.859 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:08:17.779 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Algebra/Order/Floor.lean
+  Full Name: tendsto_ceil_left
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 249.7256336551509
+  Environment Time: 409.66129575530067
+  Total Time: 659.9955622850102
+  Total Nodes: 1499
+  Searched Nodes: 36
+2024-05-21 08:08:17.780 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:08:17.790 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/BigOperators/Basic.lean'), full_name='Multiset.add_eq_union_left_of_le')
+2024-05-21 08:08:22.830 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Geometry/Manifold/ContMDiff/Defs.lean
+  Full Name: smooth_iff
+
+Status: Status.PROVED
+
+Proof:
+  simp [Smooth, continuous_iff_continuousOn_univ]
+  simp [contMDiff_iff, continuous_iff_continuousOn_univ]
+
+Search Statistics:
+  Actor Time: 31.451763174962252
+  Environment Time: 10.911221756134182
+  Total Time: 42.3786837279913
+  Total Nodes: 260
+  Searched Nodes: 6
+2024-05-21 08:08:22.831 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:08:22.839 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('.lake/packages/std/Std/Data/List/Pairwise.lean'), full_name='List.pwFilter_cons_of_pos')
+2024-05-21 08:08:29.059 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:08:51.512 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:08:54.939 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/EMetricSpace/Lipschitz.lean
+  Full Name: continuousOn_prod_of_subset_closure_continuousOn_lipschitzOnWith
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 462.5682751170243
+  Environment Time: 141.67260763334343
+  Total Time: 604.4580608899996
+  Total Nodes: 4551
+  Searched Nodes: 109
+2024-05-21 08:08:54.940 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:08:54.949 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean'), full_name='natDegree_minpolyDiv_succ')
+2024-05-21 08:09:22.519 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Algebra/Star/Pointwise.lean
+  Full Name: Set.iUnion_star
+
+Status: Status.PROVED
+
+Proof:
+  ext
+  simp
+
+Search Statistics:
+  Actor Time: 9.6349347679934
+  Environment Time: 1.0272371910104994
+  Total Time: 10.664408329990692
+  Total Nodes: 39
+  Searched Nodes: 2
+2024-05-21 08:09:22.520 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:09:22.529 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Data/Polynomial/Basic.lean'), full_name='Polynomial.toFinsupp_sub')
+2024-05-21 08:09:44.536 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Measure/MeasureSpace.lean
+  Full Name: MeasureTheory.Measure.AbsolutelyContinuous.smul
+
+Status: Status.PROVED
+
+Proof:
+  intro x hx
+  simp [h hx]
+
+Search Statistics:
+  Actor Time: 15.369469841010869
+  Environment Time: 4.297466575022554
+  Total Time: 19.674129123974126
+  Total Nodes: 119
+  Searched Nodes: 4
+2024-05-21 08:09:44.537 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:09:44.545 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/CantorNormalForm.lean'), full_name='Ordinal.CNF_zero')
+2024-05-21 08:11:28.584 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:11:53.041 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:12:25.880 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean
+  Full Name: MeasureTheory.snormEssSup_mono_measure
+
+Status: Status.PROVED
+
+Proof:
+  simp_rw [MeasureTheory.snormEssSup]
+  exact essSup_mono_measure hμν
+
+Search Statistics:
+  Actor Time: 36.72395387600409
+  Environment Time: 16.94470686407294
+  Total Time: 53.68101304702577
+  Total Nodes: 220
+  Searched Nodes: 7
+2024-05-21 08:12:25.881 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:12:25.890 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/SuccPred/Basic.lean'), full_name='Order.covBy_succ_of_not_isMax')
