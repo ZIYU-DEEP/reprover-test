@@ -287,6 +287,9 @@ class BestFirstSearchProver:
         """
         Given current state, generate the next target state.
         """
+        # Get the file path of the theorem
+        path = str(self.theorem.file_path)
+        
         # Use the goal generator to sample candidate target goals
         candidate_target_goals = self.goal_gen.generate(
             inputs=format_input(ts, gen_type="goal"),  # Format the input for goal generation
