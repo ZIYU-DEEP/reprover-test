@@ -2699,3 +2699,137 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 08:16:20.022 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/RingTheory/Ideal/Operations.lean'), full_name='RingHom.ker_rangeSRestrict')
+2024-05-21 08:20:30.170 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:20:39.982 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/RingTheory/RootsOfUnity/Minpoly.lean
+  Full Name: IsPrimitiveRoot.minpoly_dvd_expand
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 566.27530498337
+  Environment Time: 36.630480543593876
+  Total Time: 602.9556683480041
+  Total Nodes: 987
+  Searched Nodes: 28
+2024-05-21 08:20:39.983 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:20:39.992 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('.lake/packages/std/Std/Data/AssocList.lean'), full_name='Std.AssocList.contains_eq')
+2024-05-21 08:21:37.389 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:21:46.816 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: .lake/packages/std/Std/Data/AssocList.lean
+  Full Name: Std.AssocList.contains_eq
+
+Status: Status.PROVED
+
+Proof:
+  induction l <;> simp [*, Std.AssocList.contains]
+
+Search Statistics:
+  Actor Time: 24.735317367943935
+  Environment Time: 0.1186880097957328
+  Total Time: 24.85452603606973
+  Total Nodes: 5
+  Searched Nodes: 1
+2024-05-21 08:21:46.816 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:21:46.824 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/Algebra/Group/Basic.lean'), full_name='Subgroup.coe_topologicalClosure_bot')
+2024-05-21 08:22:38.439 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:22:48.675 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Algebra/Group/Basic.lean
+  Full Name: Subgroup.coe_topologicalClosure_bot
+
+Status: Status.PROVED
+
+Proof:
+  simp
+
+Search Statistics:
+  Actor Time: 16.71761441603303
+  Environment Time: 0.05228699499275535
+  Total Time: 16.77021923905704
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-21 08:22:48.677 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:22:48.685 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Data/Set/Finite.lean'), full_name='Set.Infinite.exists_lt_map_eq_of_mapsTo')
+2024-05-21 08:24:46.148 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:24:54.037 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/ModelTheory/Skolem.lean
+  Full Name: FirstOrder.Language.exists_small_elementarySubstructure
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 603.8981890537543
+  Environment Time: 8.342067169141956
+  Total Time: 612.2770189689472
+  Total Nodes: 843
+  Searched Nodes: 28
+2024-05-21 08:24:54.037 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:24:54.045 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Filter/CountableSeparatingOn.lean'), full_name='Filter.EventuallyEq.of_forall_separating_preimage')
+2024-05-21 08:25:33.381 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:25:41.728 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Probability/Process/PartitionFiltration.lean
+  Full Name: ProbabilityTheory.measurable_countablePartitionSet_subtype
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 594.3076366268797
+  Environment Time: 16.268937041866593
+  Total Time: 610.6224854829488
+  Total Nodes: 1237
+  Searched Nodes: 28
+2024-05-21 08:25:41.729 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:25:41.740 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Measure/MeasureSpace.lean'), full_name='MeasureTheory.ae_map_mem_range')
+2024-05-21 08:27:12.775 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:27:21.849 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/RingTheory/Ideal/Operations.lean
+  Full Name: RingHom.ker_rangeSRestrict
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 542.010702552856
+  Environment Time: 59.040423240861855
+  Total Time: 601.1249757820042
+  Total Nodes: 1053
+  Searched Nodes: 31
+2024-05-21 08:27:21.850 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:27:21.859 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/NumberTheory/NumberField/Embeddings.lean'), full_name='NumberField.ComplexEmbedding.isReal_conjugate_iff')
