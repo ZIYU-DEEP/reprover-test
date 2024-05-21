@@ -6,6 +6,8 @@ leandojo-pl-ckpts/
 results/
 local/
 *.edu
+# *.sh
+# bash/
 
 
 # Byte-compiled / optimized / DLL files

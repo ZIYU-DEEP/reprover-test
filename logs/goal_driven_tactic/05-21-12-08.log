@@ -1,0 +1,28 @@
+2024-05-21 12:08:11.139 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:08:11.499 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:08:11.599 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:08:11.672 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:08:11.678 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Bounds/Basic.lean'), full_name='not_bddBelow_iff')
+2024-05-21 12:08:55.809 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-21 12:09:07.064 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/Bounds/Basic.lean
+  Full Name: not_bddBelow_iff
+
+Status: Status.PROVED
+
+Proof:
+  simp [bddBelow_def]
+
+Search Statistics:
+  Planner Time: 5.851578699017409
+  Actor Time: 2.7210690550273284
+  Environment Time: 0.26027467398671433
+  Total Time: 8.833805625967216
+  Total Nodes: 3
+  Searched Nodes: 1
+2024-05-21 12:09:07.065 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+

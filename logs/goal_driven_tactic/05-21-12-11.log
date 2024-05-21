@@ -1,0 +1,103 @@
+2024-05-21 12:11:28.310 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:11:28.319 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/Principal.lean'), full_name='Ordinal.mul_omega')
+2024-05-21 12:11:29.457 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:11:29.461 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:11:29.462 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 12:11:29.464 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/Reflection.lean'), full_name='Module.preReflection_preReflection')
+2024-05-21 12:11:29.467 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Bounds/Basic.lean'), full_name='not_bddBelow_iff')
+2024-05-21 12:11:29.468 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean'), full_name='MeasureTheory.Lp.simpleFunc.toLp_add')
+2024-05-21 12:12:28.142 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-21 12:12:37.529 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-21 12:12:41.642 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/Bounds/Basic.lean
+  Full Name: not_bddBelow_iff
+
+Status: Status.PROVED
+
+Proof:
+  simp [bddBelow_def]
+
+Search Statistics:
+  Planner Time: 8.026152939011808
+  Actor Time: 4.847642979002558
+  Environment Time: 0.20246992097236216
+  Total Time: 13.077025477949064
+  Total Nodes: 3
+  Searched Nodes: 1
+2024-05-21 12:12:41.642 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 12:12:41.650 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/ConditionallyCompleteLattice/Basic.lean'), full_name='OrderIso.map_ciSup')
+2024-05-21 12:12:51.682 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean
+  Full Name: MeasureTheory.Lp.simpleFunc.toLp_add
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Planner Time: 6.257722875976469
+  Actor Time: 5.584852165018674
+  Environment Time: 0.062401408969890326
+  Total Time: 11.905723693955224
+  Total Nodes: 4
+  Searched Nodes: 1
+2024-05-21 12:12:51.683 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 12:12:51.693 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/NumberTheory/LegendreSymbol/JacobiSymbol.lean'), full_name='jacobiSym.eq_zero_iff_not_coprime')
+2024-05-21 12:15:00.570 | INFO     | prover_rir.proof_search:_best_first_search:192 - Ran out of nodes to search.
+2024-05-21 12:15:12.198 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/ConditionallyCompleteLattice/Basic.lean
+  Full Name: OrderIso.map_ciSup
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 9.433272336027585
+  Actor Time: 78.2369596278877
+  Environment Time: 5.896406002691947
+  Total Time: 93.58802541397745
+  Total Nodes: 669
+  Searched Nodes: 3
+2024-05-21 12:15:12.199 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 12:15:12.208 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Bounds/Basic.lean'), full_name='IsLeast.dual')
+2024-05-21 12:15:54.600 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-21 12:16:05.896 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/Bounds/Basic.lean
+  Full Name: IsLeast.dual
+
+Status: Status.PROVED
+
+Proof:
+  simpa using h
+
+Search Statistics:
+  Planner Time: 2.126414416998159
+  Actor Time: 4.49762257898692
+  Environment Time: 0.009543743974063545
+  Total Time: 6.634091281041037
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-21 12:16:05.897 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 12:16:05.906 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Probability/Distributions/Geometric.lean'), full_name='ProbabilityTheory.geometricPMFRealSum')

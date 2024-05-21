@@ -13,7 +13,7 @@ from typing import List, Tuple, Optional
 from lean_dojo import LeanGitRepo, Theorem, Pos, is_available_in_cache
 
 from common import set_logger
-from prover.proof_search import Status, DistributedProver
+from prover_rir.proof_search import Status, DistributedProver
 
 
 def _get_theorems(
@@ -286,7 +286,7 @@ def main() -> None:
                         help="The type for the generator.")
     
     parser.add_argument(
-        "--goal_ckpt_path",
+        "--goal-ckpt-path",
         type=str,
         help="Checkpoint of the goal generator.",
     )
