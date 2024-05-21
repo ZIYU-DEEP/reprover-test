@@ -1,0 +1,30 @@
+2024-05-21 05:15:43.253 | INFO     | prover.proof_search:__init__:107 - Using gen_type: default.
+2024-05-21 05:15:43.253 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00'), file_path=PosixPath('MiniF2F/Test.lean'), full_name='induction_12dvd4expnp1p20')
+2024-05-21 05:20:01.541 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 05:20:05.833 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: induction_12dvd4expnp1p20
+
+Status: Status.PROVED
+
+Proof:
+  norm_num
+  induction' n with n IH
+  norm_num
+  omega
+
+Search Statistics:
+  Actor Time: 223.5415531391045
+  Environment Time: 12.62680825672578
+  Total Time: 236.19823642505798
+  Total Nodes: 522
+  Searched Nodes: 16
+2024-05-21 05:20:05.834 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 05:20:05.834 | INFO     | __main__:evaluate:199 - Evaluation done! 1 theorems proved, 0 theorems failed, 0 non-theorems discarded
+2024-05-21 05:20:05.842 | INFO     | __main__:evaluate:214 - Results saved to ./results/default/740354c7-b792-4e8d-99ed-fea02e0f6e80_results.pickle
+2024-05-21 05:20:05.843 | INFO     | __main__:main:314 - Pass@1: 1.0
