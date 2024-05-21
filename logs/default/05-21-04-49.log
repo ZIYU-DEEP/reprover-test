@@ -1062,3 +1062,70 @@ Search Statistics:
 
 2024-05-21 06:14:05.862 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/Normed/Group/Seminorm.lean'), full_name='GroupSeminorm.add_apply')
 2024-05-21 06:14:42.522 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 06:14:51.157 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Normed/Group/Seminorm.lean
+  Full Name: GroupSeminorm.add_apply
+
+Status: Status.PROVED
+
+Proof:
+  simp
+
+Search Statistics:
+  Actor Time: 6.586107951938175
+  Environment Time: 0.017641373095102608
+  Total Time: 6.6040090679889545
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-21 06:14:51.157 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 06:14:51.169 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/Bornology/Basic.lean'), full_name='Bornology.isCobounded_iInter')
+2024-05-21 06:15:42.782 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 06:15:52.268 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Bornology/Basic.lean
+  Full Name: Bornology.isCobounded_iInter
+
+Status: Status.PROVED
+
+Proof:
+  simp [Bornology.isCobounded_def]
+
+Search Statistics:
+  Actor Time: 25.30361056793481
+  Environment Time: 0.23361969541292638
+  Total Time: 25.538059768965468
+  Total Nodes: 14
+  Searched Nodes: 1
+2024-05-21 06:15:52.269 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 06:15:52.277 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Integral/IntegrableOn.lean'), full_name='MeasurableEmbedding.integrableAtFilter_map_iff')
+2024-05-21 06:15:56.949 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 06:16:07.749 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/RingTheory/Finiteness.lean
+  Full Name: Submodule.fg_unit
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 475.89707482629456
+  Environment Time: 161.24037555232644
+  Total Time: 659.9946222379804
+  Total Nodes: 916
+  Searched Nodes: 28
+2024-05-21 06:16:07.750 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 06:16:07.759 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.lean'), full_name='Real.tan_nat_mul_pi_sub')
