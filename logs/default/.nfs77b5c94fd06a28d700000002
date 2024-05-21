@@ -2165,3 +2165,143 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 08:12:25.890 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/SuccPred/Basic.lean'), full_name='Order.covBy_succ_of_not_isMax')
+2024-05-21 08:12:38.230 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:12:40.212 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:12:49.918 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Data/Fin/Tuple/Basic.lean
+  Full Name: Fin.forall_iff_succAbove
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 470.1652781810553
+  Environment Time: 134.0920903129736
+  Total Time: 604.4581616350042
+  Total Nodes: 2958
+  Searched Nodes: 115
+2024-05-21 08:12:49.919 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:12:49.930 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/Ring/CentroidHom.lean'), full_name='CentroidHom.coe_comp')
+2024-05-21 08:13:47.586 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/SetTheory/Ordinal/CantorNormalForm.lean
+  Full Name: Ordinal.CNF_zero
+
+Status: Status.PROVED
+
+Proof:
+  simp [Ordinal.CNF]
+
+Search Statistics:
+  Actor Time: 8.61832626501564
+  Environment Time: 0.07975671294843778
+  Total Time: 8.699140584969427
+  Total Nodes: 21
+  Searched Nodes: 1
+2024-05-21 08:13:47.587 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:13:47.595 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Measure/MeasureSpace.lean'), full_name='MeasureTheory.AEDisjoint.preimage')
+2024-05-21 08:13:50.173 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Data/Polynomial/Basic.lean
+  Full Name: Polynomial.toFinsupp_sub
+
+Status: Status.PROVED
+
+Proof:
+  cases a
+  cases b
+  rw [← Polynomial.ofFinsupp_sub]
+
+Search Statistics:
+  Actor Time: 22.991941181011498
+  Environment Time: 1.5714209218276665
+  Total Time: 24.568438504007645
+  Total Nodes: 74
+  Searched Nodes: 3
+2024-05-21 08:13:50.174 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:13:50.182 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/Order/CompleteField.lean'), full_name='LinearOrderedField.inducedMap_one')
+2024-05-21 08:14:45.553 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:14:50.903 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:16:07.556 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Order/RelSeries.lean
+  Full Name: RelSeries.length_le_length_longestOf
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 488.89525549596874
+  Environment Time: 115.93041232108953
+  Total Time: 605.0548395299702
+  Total Nodes: 4951
+  Searched Nodes: 134
+2024-05-21 08:16:07.558 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:16:07.567 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/UniformSpace/Equicontinuity.lean'), full_name='Set.UniformEquicontinuousOn.mono')
+2024-05-21 08:16:13.667 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: .lake/packages/std/Std/Data/List/Pairwise.lean
+  Full Name: List.pwFilter_cons_of_pos
+
+Status: Status.PROVED
+
+Proof:
+  unfold List.pwFilter
+  rw [List.foldr_cons, if_pos]
+  simpa using h
+
+Search Statistics:
+  Actor Time: 191.93385606619995
+  Environment Time: 33.78095031896373
+  Total Time: 225.78691996098496
+  Total Nodes: 1171
+  Searched Nodes: 43
+2024-05-21 08:16:13.668 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:16:13.677 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/Separation.lean'), full_name='continuousWithinAt_update_of_ne')
+2024-05-21 08:16:29.472 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:17:39.221 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Algebra/Ring/CentroidHom.lean
+  Full Name: CentroidHom.coe_comp
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Actor Time: 4.2933595679933205
+  Environment Time: 0.005003196012694389
+  Total Time: 4.29878385696793
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-21 08:17:39.222 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:17:39.231 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/ContinuousFunction/NonUnitalFunctionalCalculus.lean'), full_name='cfcₙHom_comp')
+2024-05-21 08:18:30.032 | WARNING  | prover.proof_search:search:150 - Dojo crashed with Unexpected EOF when proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/SuccPred/Basic.lean'), full_name='Order.covBy_succ_of_not_isMax')

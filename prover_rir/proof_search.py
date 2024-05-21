@@ -87,7 +87,7 @@ class BestFirstSearchProver:
         timeout: int,
         num_sampled_tactics: int,
         debug: bool,
-        gen_type: str = "default",
+        gen_type: str = "goal_driven_tactic",
         goal_gen=None,  # rir: added goal generator
         num_sampled_goals: int=10,  # rir: added num_sampled_goals
     ) -> None:

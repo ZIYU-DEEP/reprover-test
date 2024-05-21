@@ -151,7 +151,9 @@ def evaluate(
     num_gpus: int = 0,
     verbose: bool = False,
     start_ind: int = 0,
-    gen_type: str = 'default',
+    gen_type: str="goal_driven_tactic",
+    goal_ckpt_path: Optional[str] = None,  # added for rir
+    num_sampled_goals: int = 10,  # added for rir
 ) -> float:
     """
     Evaluates the prover on the specified theorems.
@@ -183,6 +185,8 @@ def evaluate(
         num_sampled_tactics=num_sampled_tactics,
         debug=verbose,
         gen_type=gen_type,
+        goal_ckpt_path=goal_ckpt_path,
+        num_sampled_goals=num_sampled_goals,
     )
     results = prover.search_unordered(repo, theorems, positions)
 
@@ -280,6 +284,19 @@ def main() -> None:
     parser.add_argument("--gen-type", type=str, default='default',
                         choices=['default', 'goal_driven_tactic', 'goal', 'joint'],
                         help="The type for the generator.")
+    
+    parser.add_argument(
+        "--goal_ckpt_path",
+        type=str,
+        help="Checkpoint of the goal generator.",
+    )
+    parser.add_argument(
+        "--num-sampled-goals",
+        type=int,
+        default=10,
+        help="Number of goals to sample at each node during proof search.",
+    )
+    
 
     args = parser.parse_args()
     set_logger(args.verbose)
@@ -309,6 +326,8 @@ def main() -> None:
         args.verbose,
         args.start_ind,
         args.gen_type,
+        args.goal_ckpt_path,
+        args.num_sampled_goals,
     )
 
     logger.info(f"Pass@1: {pass_1}")

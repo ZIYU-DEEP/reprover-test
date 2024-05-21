@@ -1879,3 +1879,101 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 08:12:02.969 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Filter/Basic.lean'), full_name='Filter.map_const')
+2024-05-21 08:12:53.951 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:13:09.622 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 08:14:07.869 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Analytic/CPolynomial.lean
+  Full Name: CPolynomialAt_const
+
+Status: Status.PROVED
+
+Proof:
+  simp [CPolynomialAt]
+  by_contra! h
+  apply h
+  exact hasFiniteFPowerSeriesAt_const
+
+Search Statistics:
+  Actor Time: 215.53990998290828
+  Environment Time: 17.992034683702514
+  Total Time: 233.59379933896707
+  Total Nodes: 814
+  Searched Nodes: 46
+2024-05-21 08:14:07.870 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:14:07.882 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Hom/Basic.lean'), full_name='OrderHom.apply_mono')
+2024-05-21 08:14:12.839 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:14:26.227 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Geometry/Euclidean/Angle/Oriented/Affine.lean
+  Full Name: Collinear.two_zsmul_oangle_eq_right
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 420.2309804621327
+  Environment Time: 179.56893914824468
+  Total Time: 600.0142270569922
+  Total Nodes: 2828
+  Searched Nodes: 94
+2024-05-21 08:14:26.228 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:14:26.238 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean'), full_name='TensorAlgebra.ringQuot_mkAlgHom_freeAlgebra_ι_eq_ι')
+2024-05-21 08:14:54.212 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:15:28.430 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/RingTheory/Algebraic.lean
+  Full Name: IsAlgebraic.algHom
+
+Status: Status.PROVED
+
+Proof:
+  rcases h with ⟨b, hb⟩
+  use b, hb.1
+  rw [Polynomial.aeval_algHom_apply, hb.2, map_zero]
+
+Search Statistics:
+  Actor Time: 8.72151137306355
+  Environment Time: 1.6881536720320582
+  Total Time: 10.415249548968859
+  Total Nodes: 107
+  Searched Nodes: 4
+2024-05-21 08:15:28.431 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:15:28.437 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Filter/Bases.lean'), full_name='Filter.generate_eq_generate_inter')
+2024-05-21 08:16:12.741 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Data/ENNReal/Basic.lean
+  Full Name: ENNReal.coe_nsmul
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Actor Time: 2.7829407380195335
+  Environment Time: 0.6917128259083256
+  Total Time: 3.475801513006445
+  Total Nodes: 23
+  Searched Nodes: 1
+2024-05-21 08:16:12.742 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 08:16:12.751 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean'), full_name='Complex.Gamma_eq_GammaAux')
+2024-05-21 08:18:23.995 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 08:18:26.866 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
