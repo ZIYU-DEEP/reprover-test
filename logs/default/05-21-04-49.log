@@ -1764,3 +1764,52 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 07:16:31.238 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/NumberTheory/SmoothNumbers.lean'), full_name='Nat.prime_of_mem_primesBelow')
+2024-05-21 07:17:25.302 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 07:17:33.602 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/NumberTheory/SmoothNumbers.lean
+  Full Name: Nat.prime_of_mem_primesBelow
+
+Status: Status.PROVED
+
+Proof:
+  rw [Nat.mem_primesBelow] at h
+  exact h.2
+
+Search Statistics:
+  Actor Time: 23.82041857286822
+  Environment Time: 0.29568894708063453
+  Total Time: 24.118209953070618
+  Total Nodes: 48
+  Searched Nodes: 2
+2024-05-21 07:17:33.604 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:17:33.612 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Measure/Stieltjes.lean'), full_name='StieltjesFunction.measure_Ioc')
+2024-05-21 07:17:37.733 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 07:17:46.902 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Dynamics/Ergodic/MeasurePreserving.lean
+  Full Name: MeasureTheory.MeasurePreserving.restrict_image_emb
+
+Status: Status.PROVED
+
+Proof:
+  refine' ⟨hf.1, _⟩
+  rw [← hf.map_eq, h₂.restrict_map]
+  rw [Set.preimage_image_eq _ h₂.injective]
+
+Search Statistics:
+  Actor Time: 535.3603684538975
+  Environment Time: 6.631939625600353
+  Total Time: 542.0212562880479
+  Total Nodes: 663
+  Searched Nodes: 18
+2024-05-21 07:17:46.903 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:17:46.916 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Group/Prod.lean'), full_name='MeasureTheory.absolutelyContinuous_map_mul_right')
