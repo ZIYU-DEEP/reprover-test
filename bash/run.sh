@@ -116,3 +116,14 @@ CUDA_VISIBLE_DEVICES=2,3 python prover/evaluate.py \
     --ckpt_path $default_path \
     --gen-type default \
     --start-ind 5
+
+CUDA_VISIBLE_DEVICES=0,1 python prover/evaluate.py \
+    --data-path data/leandojo_benchmark_4/random/ \
+    --split test \
+    --num-workers 5 \
+    --num-gpus 2 \
+    --num-theorems 20 \
+    --ckpt_path $joint_ckpt_path \
+    --gen-type joint \
+    --start-ind 5 \
+    --timeout 1200
