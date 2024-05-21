@@ -276,3 +276,112 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 00:01:07.011 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Integral/Bochner.lean'), full_name='MeasureTheory.integral_map_equiv')
+2024-05-21 00:17:18.381 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 00:17:29.424 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Calculus/FDeriv/Comp.lean
+  Full Name: DifferentiableOn.comp
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 1220.1413021059416
+  Environment Time: 18.779134491458535
+  Total Time: 1238.9542179410055
+  Total Nodes: 304
+  Searched Nodes: 22
+2024-05-21 00:17:29.425 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 00:17:29.434 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/MeasurableSpace/Defs.lean'), full_name='Set.Finite.measurableSet_biInter')
+2024-05-21 00:18:11.338 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 00:18:23.376 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Algebra/Group/Basic.lean
+  Full Name: tendsto_inv
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 1176.9930264201248
+  Environment Time: 27.933753371500643
+  Total Time: 1205.0013912039867
+  Total Nodes: 1617
+  Searched Nodes: 65
+2024-05-21 00:18:23.376 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 00:18:23.383 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/QuadraticForm/Prod.lean'), full_name='QuadraticForm.Isometry.snd_comp_inl')
+2024-05-21 00:19:25.934 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 00:19:37.428 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/LinearAlgebra/QuadraticForm/Prod.lean
+  Full Name: QuadraticForm.Isometry.snd_comp_inl
+
+Status: Status.PROVED
+
+Proof:
+  rfl
+
+Search Statistics:
+  Actor Time: 27.301881494000554
+  Environment Time: 0.013147175021003932
+  Total Time: 27.315953574026935
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-21 00:19:37.429 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 00:19:37.439 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Measure/Restrict.lean'), full_name='MeasureTheory.NullMeasurable.measure_preimage_eq_measure_restrict_preimage_of_ae_compl_eq_const')
+2024-05-21 00:19:58.264 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 00:20:11.143 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Data/Set/Function.lean
+  Full Name: Set.bijOn_of_subsingleton'
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 1189.955312219041
+  Environment Time: 39.97144540640875
+  Total Time: 1229.95866035801
+  Total Nodes: 480
+  Searched Nodes: 24
+2024-05-21 00:20:11.144 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 00:23:03.823 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 00:23:15.228 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Integral/Bochner.lean
+  Full Name: MeasureTheory.integral_map_equiv
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 1174.9926232890575
+  Environment Time: 56.58636148046935
+  Total Time: 1231.642405333987
+  Total Nodes: 292
+  Searched Nodes: 16
+2024-05-21 00:23:15.229 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+

@@ -54,6 +54,7 @@ export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goa
 export tactic_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt'
 export goal_driven_tactic_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt'
 export default_path='/home/ubuntu/dojo/github/reprover-test/leandojo-pl-ckpts/generator_random.ckpt'
+export joint_new_ckpt_path='/home/ubuntu/dojo/reprover-joint-ckpt/checkpoint-epoch=01-step=7200-loss_val=0.1362-loss_train=0.1102.ckpt'
 
 
 CUDA_VISIBLE_DEVICES=0 python prover/evaluate.py \

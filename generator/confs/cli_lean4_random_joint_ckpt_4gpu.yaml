@@ -1,0 +1,76 @@
+# Add the checkpoint path
+init_ckpt_path: /home/ubuntu/chicago/github/reprover-test/lightning_logs/joint_ckpt/reprover-joint/gs7qewdn/checkpoints/checkpoint-epoch=01-step=7200-loss_val=0.1362-loss_train=0.1102.ckpt  # This should only load the weight
+init_ckpt_filename: checkpoint/mp_rank_00_model_states.pt  
+# init_ckpt_path: null
+ckpt_path: null # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950  # however deepspeed requires the number of devices to be the same
+seed_everything: 3407  # https://arxiv.org/abs/2109.08203
+
+trainer:
+  default_root_dir: './lightning_logs/joint_ckpt'
+  accelerator: gpu
+  devices: 4  # CHANGE
+  precision: bf16-mixed
+  strategy:
+    class_path: pytorch_lightning.strategies.DeepSpeedStrategy
+    init_args:
+      stage: 2
+      offload_optimizer: false
+      cpu_checkpointing: false
+  gradient_clip_val: 1.0
+  max_steps: 100000  # num_epoch is (max_steps * num_batches) / batch_size 
+  val_check_interval: 4999  # Perform validation every 200 training steps
+  check_val_every_n_epoch: 1
+  num_sanity_val_steps: -1
+  # val_check_interval: 0.01  # 0.15  in the 8 gpus case, this is around 555 steps in a total of 3703 steps for 1 epoch
+
+  callbacks:
+
+    - class_path: pytorch_lightning.callbacks.LearningRateMonitor
+      init_args: 
+        logging_interval: step
+
+    - class_path: pytorch_lightning.callbacks.ModelCheckpoint
+      init_args:
+        verbose: true
+        save_top_k: 50
+        monitor: loss_val
+        mode: min
+        every_n_train_steps: 5000   # 600 # notice the step is meant for rank 0; in the leandojo case, we have a total of 29625 steps for one epoch; with 8 gpu, 1 gpu only need to have 3703 steps in one epoch. so we can set this as 600 to monitor more often
+        save_on_train_epoch_end: true
+        filename: 'checkpoint-{epoch:02d}-{step}-{loss_val:.4f}-{loss_train:.4f}'
+        enable_version_counter: true
+
+    - class_path: pytorch_lightning.callbacks.EarlyStopping
+      init_args:
+        monitor: loss_val  # we cannot evaluate the original Pass
+        patience: 5  # this counts the number of validation checks with no improvement, and not the number of training epochs
+        mode: min  # for loss that will be min
+        verbose: true
+
+# By default, the model will be saved at `./lightning_logs/`
+model:
+  model_name: google/byt5-small
+  lr: 8e-4  # CHANGE - the default scratch 1 gpu use 5e-4; in finetuning, we moderatly decrease it by 0.2, that gives us 1e-4; to adapt for the 8gpu setting, we slightly increase it by 2, that gives us 2e-4. other options may be 5e-5, 1e-4.
+  warmup_steps: 800  # CHANGE we use Adjusted warmup steps = Original warmup steps × (Fine-tuning learning rate / Original learning rate), so we do 2000 * (2e-4 / 5e-4) = 800
+  num_beams: 1
+  length_penalty: 0.0
+  ret_ckpt_path: null
+  eval_num_retrieved: 100
+  eval_num_workers: 8  # CHANGE
+  eval_num_gpus: 1
+  eval_num_theorems: 0  # Lower this number will make validation faster (but noiser).
+  gen_type: joint
+
+data:
+  data_path: data/leandojo_benchmark_4/random/
+  corpus_path: data/leandojo_benchmark_4/corpus.jsonl
+  keep_marks: true
+  preds_path: null
+  batch_size: 8  # effective_batch_size == batch_size * accumulate_grad_batches * devices
+  eval_batch_size: 8
+  max_inp_seq_len: 2300
+  max_oup_seq_len: 2900  # increased with tactic
+  p_drop: 0.5
+  normalize_tactics: true
+  num_workers: 8  # CHANGE
+  gen_type: joint

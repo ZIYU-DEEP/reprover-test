@@ -1,12 +1,12 @@
 # Add the checkpoint path
-init_ckpt_path: leandojo-pl-ckpts/generator_random.ckpt  # This should only load the weight
+init_ckpt_path: /home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt  # This should only load the weight
 init_ckpt_filename: checkpoint/mp_rank_00_model_states.pt  
 # init_ckpt_path: null
 ckpt_path: null # Setting a path will restore the training process  # https://github.com/Lightning-AI/pytorch-lightning/discussions/16845#discussioncomment-5092950
 seed_everything: 3407  # https://arxiv.org/abs/2109.08203
 
 trainer:
-  default_root_dir: './lightning_logs/goal_ckpt'
+  default_root_dir: './lightning_logs/goal_driven_tactic_ckpt'
   accelerator: gpu
   devices: 4
   precision: bf16-mixed
@@ -18,24 +18,22 @@ trainer:
       cpu_checkpointing: false
   gradient_clip_val: 1.0
   max_steps: 100000  # num_epoch is (max_steps * num_batches) / batch_size 
-  # check_val_every_n_epoch: 1
-  val_check_interval: 4999  
+  val_check_interval: 4999  # Perform validation every 200 training steps
   check_val_every_n_epoch: 1
   num_sanity_val_steps: -1
-  
-  callbacks:
 
+  callbacks:
     - class_path: pytorch_lightning.callbacks.LearningRateMonitor
       init_args: 
         logging_interval: step
-
+ 
     - class_path: pytorch_lightning.callbacks.ModelCheckpoint
       init_args:
         verbose: true
         save_top_k: 50
         monitor: loss_val
         mode: min
-        every_n_train_steps: 5999  # the saving frequency for the model
+        every_n_train_steps: 5000  # the saving frequency for the model
         save_on_train_epoch_end: true
         filename: 'checkpoint-{epoch:02d}-{step}-{loss_val:.4f}-{loss_train:.4f}'
         enable_version_counter: true
@@ -59,18 +57,20 @@ model:
   eval_num_workers: 8  # Lower this number if you don't have 80GB GPU memory.
   eval_num_gpus: 1
   eval_num_theorems: 0  # Lower this number will make validation faster (but noiser).
-  gen_type: goal
+  gen_type: goal_driven_tactic
 
 data:
   data_path: data/leandojo_benchmark_4/random/
   corpus_path: data/leandojo_benchmark_4/corpus.jsonl
   keep_marks: true
   preds_path: null
-  batch_size: 8  
-  eval_batch_size: 64
-  max_inp_seq_len: 2300
-  max_oup_seq_len: 2300
+  batch_size: 4  # FILE-SPECIFIC - DECREASED BY HALF (was 8) effective_batch_size == batch_size * accumulate_grad_batches * devices  # decreased batch size
+  eval_batch_size: 32  # FILE-SPECIFIC - DECREASED BY HALF  (was 64)
+  max_inp_seq_len: 4600
+  max_oup_seq_len: 512
   p_drop: 0.5
   normalize_tactics: true
   num_workers: 8
-  gen_type: goal
+  gen_type: goal_driven_tactic
+
+
