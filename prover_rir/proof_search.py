@@ -58,6 +58,7 @@ class SearchResult:
     
     # Some statistics during proof search.
     actor_time: float
+    planner_time: float
     environment_time: float
     total_time: float
     num_total_nodes: int
@@ -72,7 +73,7 @@ class SearchResult:
         else:
             proof_info = "Proof: None"
         
-        statistics_info = f"Search Statistics:\n  Actor Time: {self.actor_time}\n  Environment Time: {self.environment_time}\n  Total Time: {self.total_time}\n  Total Nodes: {self.num_total_nodes}\n  Searched Nodes: {self.num_searched_nodes}"
+        statistics_info = f"Search Statistics:\n  Planner Time: {self.planner_time}\n  Actor Time: {self.actor_time}\n  Environment Time: {self.environment_time}\n  Total Time: {self.total_time}\n  Total Nodes: {self.num_total_nodes}\n  Searched Nodes: {self.num_searched_nodes}"
         
         return f"Search Result:\n\n{theorem_info}\n\n{status_info}\n\n{proof_info}\n\n{statistics_info}"
 
@@ -102,9 +103,10 @@ class BestFirstSearchProver:
         self.total_time = None
         
         # RiR related 
-        self.gen_type = gen_type
+        self.gen_type = gen_type  # This will be specifically for goal_driven_tactic
         self.goal_gen = goal_gen
         self.num_sampled_goals = num_sampled_goals
+        self.planner_time = 0.0
         
         # Set the logger (will be saved in a seprate folder)
         set_logger(verbose=self.debug, suffix=self.gen_type)
@@ -122,6 +124,8 @@ class BestFirstSearchProver:
         self.actor_time = 0.0
         self.environment_time = 0.0
         self.num_expansions = 0
+        
+        self.planner_time = 0.0
 
         if isinstance(self.tac_gen, FixedTacticGenerator):
             imps = [self.tac_gen.module]
@@ -166,6 +170,7 @@ class BestFirstSearchProver:
                 status=self.root.status,
                 proof=proof,
                 actor_time=self.actor_time,
+                planner_time=self.planner_time,
                 environment_time=self.environment_time,
                 total_time=self.total_time,
                 num_total_nodes=len(self.nodes),
@@ -245,7 +250,7 @@ class BestFirstSearchProver:
         # Try all tactics in order of descending logprob, and collect the results. Any
         # new nodes are added to `self.nodes`, and edges are added to the result node.
         results = []  # Initialize the result list
-        for target_goal in candidate_target_goals:
+        for target_goal, target_goal_logprob in candidate_target_goals:
             
             # Low-level search on tactics
             suggestions = self._generate_tactics(ts, target_goal)  # Modified the original method 
@@ -254,7 +259,11 @@ class BestFirstSearchProver:
             for tactic, logprob in suggestions:
                 
                 # Get tactic as the edge and get the finish signal
-                edge, finished = self._run_tactic(search_node, tactic, logprob)
+                edge, finished = self._run_tactic(search_node, 
+                                                  tactic, 
+                                                  logprob,
+                                                  target_goal_logprob,  # added for rir
+                                                  )
                 
                 # Add the new edge to the results list
                 results.append(edge)
@@ -287,21 +296,6 @@ class BestFirstSearchProver:
         """
         Given current state, generate the next target state.
         """
-        # Get the file path of the theorem
-        path = str(self.theorem.file_path)
-        
-        # Use the goal generator to sample candidate target goals
-        candidate_target_goals = self.goal_gen.generate(
-            inputs=format_input(ts, gen_type="goal"),  # Format the input for goal generation
-            file_path=path,
-            theorem_full_name=self.theorem.full_name,
-            theorem_pos=self.posision,
-            num_samples=self.num_sampled_goals,
-        )
-        return [(format_output(target_goal, gen_type="goal"), target_goal_logprob) 
-                for target_goal, target_goal_logprob in candidate_target_goals]  # Format the output and return (target_goal, logprob) tuples
-
-    def _generate_tactics(self, ts: str) -> List[Tuple[str, float]]:
         
         # ------------------------------------------------
         # MISC
@@ -317,8 +311,50 @@ class BestFirstSearchProver:
         
         # ------------------------------------------------
         # Format ts for RiR
-        # TODO: GOAL_DRIVEN_TACTIC IS NOT HERE WHICH NEED ts_
         ts = format_input(ts=ts, 
+                          gen_type="goal")  # type is goal
+        # ------------------------------------------------
+
+        goal_suggestions = self.goal_gen.generate(
+            inputs=ts, 
+            file_path=path,
+            theorem_full_name=self.theorem.full_name,
+            theorem_pos=self.posision,
+            num_samples=self.num_sampled_goals,  # search width
+        )
+        
+        # ------------------------------------------------
+        # Format suggestions for RiR
+        goal_suggestions = format_suggestions(
+            suggestions=goal_suggestions,
+            gen_type="goal")  # type is goal
+        # ------------------------------------------------
+        
+        self.planner_time += time.monotonic() - t0
+
+        logger.debug(f"Goal suggestions: {goal_suggestions}")
+        return goal_suggestions
+
+    def _generate_tactics(self, ts: str, target_goal: str) -> List[Tuple[str, float]]:
+        
+        # ------------------------------------------------
+        # MISC
+        # Record the time
+        t0 = time.monotonic()
+
+        # Get the file path of the theorem
+        path = str(self.theorem.file_path)
+
+        # Set up the repo
+        if self.theorem.repo != self.repo:
+            path = self.theorem.repo.get_packages_dir() / self.theorem.repo.name / path
+        
+        # ------------------------------------------------
+        # Format ts for RiR
+        # DEBUG
+        assert self.gen_type in ["goal_driven_tactic", "default", "joint"]
+        ts = format_input(ts=ts, 
+                          ts_=target_goal,
                           gen_type=self.gen_type)
         # ------------------------------------------------
 
@@ -343,7 +379,10 @@ class BestFirstSearchProver:
         return suggestions
 
     def _run_tactic(
-        self, node: InternalNode, tactic: str, logprob: float
+        self, node: InternalNode, 
+        tactic: str, 
+        logprob: float,
+        target_goal_logprob: float,  # added for rir
     ) -> Tuple[Edge, bool]:
         
         # Get the current time
@@ -378,7 +417,8 @@ class BestFirstSearchProver:
                 assert isinstance(response, TacticState)
                 result_node = InternalNode(
                     state=response,
-                    cumulative_logprob=logprob + node.cumulative_logprob,  # Add up the prob
+                    # Add the prob for p(y | s, s*) and p(s*| s)
+                    cumulative_logprob=node.cumulative_logprob + logprob + target_goal_logprob, 
                 )
 
             if result_node.status == Status.OPEN:  # Don't search proved/failed nodes
@@ -449,7 +489,12 @@ class CpuProver(BestFirstSearchProver):
         num_sampled_tactics: int,
         debug: bool,
         gen_type: str="default",
+        goal_ckpt_path: Optional[str] = None,  # added for rir
+        num_sampled_goals: int = 10,  # added for rir
+        
     ) -> None:
+        # ----------------------------------------------------------------------
+        # SETUP THE TAC_GEN
         if ckpt_path is None:
             tac_gen = FixedTacticGenerator(tactic, module)
         else:
@@ -457,18 +502,39 @@ class CpuProver(BestFirstSearchProver):
                 ckpt_path=ckpt_path, 
                 device=torch.device("cpu"), 
                 freeze=True,
-                # gen_type=gen_type,  # adding gen_type for RiR
             )
             if tac_gen.retriever is not None:
                 if indexed_corpus_path is not None:
                     tac_gen.retriever.load_corpus(indexed_corpus_path)
                 tac_gen.retriever.reindex_corpus(batch_size=32)
+        # ----------------------------------------------------------------------
+
+        # ----------------------------------------------------------------------
+        # SETUP THE GOAL_GEN
+        if goal_ckpt_path is None:
+            goal_gen = FixedTacticGenerator(tactic, module)  # TODO: add FixedGoalGenerator
+        else:
+            goal_gen = RetrievalAugmentedGenerator.load(
+                ckpt_path=goal_ckpt_path, 
+                device=torch.device("cpu"), 
+                freeze=True,
+            )
+            
+            # TODO: the below is unnecessary
+            if goal_gen.retriever is not None:
+                if indexed_corpus_path is not None:
+                    goal_gen.retriever.load_corpus(indexed_corpus_path)
+                goal_gen.retriever.reindex_corpus(batch_size=32)
+        # ----------------------------------------------------------------------
+        
         super().__init__(
             tac_gen,
             timeout,
             num_sampled_tactics,
             debug,
             gen_type,
+            goal_gen,  # added for rir
+            num_sampled_goals,  # added for rir
         )
 
 
