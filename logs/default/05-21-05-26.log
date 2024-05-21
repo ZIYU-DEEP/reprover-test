@@ -1805,3 +1805,95 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 07:16:15.155 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/CategoryTheory/Limits/Shapes/FunctorToTypes.lean'), full_name='CategoryTheory.FunctorToTypes.binaryProductIso_inv_comp_fst_apply')
+2024-05-21 07:23:07.124 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 07:23:15.660 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Analytic/Basic.lean
+  Full Name: HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn'
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 439.6096670703264
+  Environment Time: 164.59052517917007
+  Total Time: 604.5281231820118
+  Total Nodes: 6185
+  Searched Nodes: 111
+2024-05-21 07:23:15.662 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:23:15.672 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean'), full_name='ContinuousAffineMap.norm_image_zero_le')
+2024-05-21 07:23:53.356 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 07:24:04.459 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean
+  Full Name: ContinuousAffineMap.norm_image_zero_le
+
+Status: Status.PROVED
+
+Proof:
+  simpa [ContinuousAffineMap.norm_def] using f.le_opNorm 0
+
+Search Statistics:
+  Actor Time: 3.4206206089584157
+  Environment Time: 1.2993296025088057
+  Total Time: 4.7223252929979935
+  Total Nodes: 47
+  Searched Nodes: 1
+2024-05-21 07:24:04.460 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:24:04.469 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/Convex/Between.lean'), full_name='Wbtw.left_ne_right_of_ne_right')
+2024-05-21 07:24:50.028 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 07:25:00.898 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Convex/Between.lean
+  Full Name: Wbtw.left_ne_right_of_ne_right
+
+Status: Status.PROVED
+
+Proof:
+  rintro rfl
+  simp [hne] at h
+
+Search Statistics:
+  Actor Time: 5.9093104909406975
+  Environment Time: 0.5118509022286162
+  Total Time: 6.424135121051222
+  Total Nodes: 59
+  Searched Nodes: 2
+2024-05-21 07:25:00.900 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:25:00.911 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Probability/Kernel/MeasureCompProd.lean'), full_name='MeasureTheory.Measure.snd_dirac_unit_compProd_const')
+2024-05-21 07:26:04.618 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 07:26:13.100 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/MeasurableSpace/Basic.lean
+  Full Name: measurable_of_measurable_on_compl_finite
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 538.8277678687591
+  Environment Time: 63.68963420880027
+  Total Time: 602.8113657219801
+  Total Nodes: 5922
+  Searched Nodes: 169
+2024-05-21 07:26:13.101 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:26:13.109 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Algebra/Homology/Augment.lean'), full_name='CochainComplex.augmentTruncate_inv_f_succ')
+2024-05-21 07:26:49.686 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.

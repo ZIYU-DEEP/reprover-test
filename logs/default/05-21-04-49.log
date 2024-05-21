@@ -1813,3 +1813,50 @@ Search Statistics:
 ---------------------------------
 
 2024-05-21 07:17:46.916 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Group/Prod.lean'), full_name='MeasureTheory.absolutelyContinuous_map_mul_right')
+2024-05-21 07:22:38.679 | INFO     | prover.proof_search:_best_first_search:204 - Found a proof!
+2024-05-21 07:22:46.326 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Bornology/Basic.lean
+  Full Name: Bornology.isBounded_insert
+
+Status: Status.PROVED
+
+Proof:
+  constructor <;> intro h
+  exact h.subset (Set.subset_insert x s)
+  exact h.insert x
+
+Search Statistics:
+  Actor Time: 435.2245124379406
+  Environment Time: 4.9835630300221965
+  Total Time: 440.23809587792493
+  Total Nodes: 629
+  Searched Nodes: 21
+2024-05-21 07:22:46.328 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:22:46.336 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/Complex/PhragmenLindelof.lean'), full_name='PhragmenLindelof.eq_zero_on_quadrant_III')
+2024-05-21 07:25:45.689 | INFO     | prover.proof_search:_best_first_search:196 - Search timed out.
+2024-05-21 07:25:53.813 | INFO     | prover.proof_search:search:170 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/LocallyConvex/WithSeminorms.lean
+  Full Name: WithSeminorms.hasBasis
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Actor Time: 589.5227172018494
+  Environment Time: 25.06971665623132
+  Total Time: 614.6686682000291
+  Total Nodes: 1679
+  Searched Nodes: 39
+2024-05-21 07:25:53.814 | INFO     | prover.proof_search:search:171 - 
+---------------------------------
+
+2024-05-21 07:25:53.825 | INFO     | prover.proof_search:search:113 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/GroupTheory/OrderOfElement.lean'), full_name='orderOf_eq_zero_iff')
