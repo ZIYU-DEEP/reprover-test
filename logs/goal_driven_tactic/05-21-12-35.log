@@ -5,7 +5,7 @@
 2024-05-21 12:35:40.603 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
 2024-05-21 12:35:40.609 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/Reflection.lean'), full_name='Module.preReflection_preReflection')
 2024-05-21 12:35:40.663 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
-2024-05-21 12:35:40.669 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/Principal.lean'), full_name='Ordinal.mul_omega')
+2024-05-21 12:35:40.669 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/maCategoryTheory.Limits.prod.symmetryCategoryTheory.Limits.prod.symmetryCategoryTheory.Limits.prod.symmetrythlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/Principal.lean'), full_name='Ordinal.mul_omega')
 2024-05-21 12:35:40.735 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
 2024-05-21 12:35:40.741 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/ConditionallyCompleteLattice/Basic.lean'), full_name='OrderIso.map_ciSup')
 2024-05-21 12:35:40.803 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
@@ -371,115 +371,5 @@ Search Statistics:
   Total Nodes: 86
   Searched Nodes: 2
 2024-05-21 12:43:43.616 | INFO     | prover_rir.proof_search:search:180 - 
----------------------------------
-
-2024-05-21 12:49:36.789 | WARNING  | prover_rir.proof_search:search:158 - Dojo crashed with Unexpected EOF when proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/Reflection.lean'), full_name='Module.preReflection_preReflection')
-2024-05-21 12:49:48.722 | INFO     | prover_rir.proof_search:search:179 - Search Result:
-
-Theorem:
-  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
-  File Path: Mathlib/LinearAlgebra/Reflection.lean
-  Full Name: Module.preReflection_preReflection
-
-Status: Status.OPEN
-
-Proof: None
-
-Search Statistics:
-  Planner Time: 47.54658042092342
-  Actor Time: 162.3007578899269
-  Environment Time: 105.42201839212794
-  Total Time: 298.3795136300032
-  Total Nodes: 1062
-  Searched Nodes: 13
-2024-05-21 12:49:48.723 | INFO     | prover_rir.proof_search:search:180 - 
----------------------------------
-
-2024-05-21 12:56:39.379 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
-2024-05-21 12:56:43.312 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
-2024-05-21 12:56:52.087 | INFO     | prover_rir.proof_search:search:179 - Search Result:
-
-Theorem:
-  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
-  File Path: Mathlib/NumberTheory/LegendreSymbol/JacobiSymbol.lean
-  Full Name: jacobiSym.eq_zero_iff_not_coprime
-
-Status: Status.OPEN
-
-Proof: None
-
-Search Statistics:
-  Planner Time: 254.3447614403558
-  Actor Time: 475.05354290560354
-  Environment Time: 471.7228356837877
-  Total Time: 1201.4689227570198
-  Total Nodes: 7068
-  Searched Nodes: 131
-2024-05-21 12:56:52.088 | INFO     | prover_rir.proof_search:search:180 - 
----------------------------------
-
-2024-05-21 12:56:56.898 | INFO     | prover_rir.proof_search:search:179 - Search Result:
-
-Theorem:
-  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
-  File Path: Mathlib/SetTheory/Ordinal/Principal.lean
-  Full Name: Ordinal.mul_omega
-
-Status: Status.OPEN
-
-Proof: None
-
-Search Statistics:
-  Planner Time: 370.0549359288998
-  Actor Time: 644.951549296442
-  Environment Time: 186.9503524011816
-  Total Time: 1202.315606654971
-  Total Nodes: 9864
-  Searched Nodes: 178
-2024-05-21 12:56:56.898 | INFO     | prover_rir.proof_search:search:180 - 
----------------------------------
-
-2024-05-21 12:57:09.982 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
-2024-05-21 12:57:21.314 | INFO     | prover_rir.proof_search:search:179 - Search Result:
-
-Theorem:
-  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
-  File Path: Mathlib/Probability/Distributions/Geometric.lean
-  Full Name: ProbabilityTheory.geometricPMFRealSum
-
-Status: Status.OPEN
-
-Proof: None
-
-Search Statistics:
-  Planner Time: 45.202850561065134
-  Actor Time: 237.85230526520172
-  Environment Time: 952.5977143194759
-  Total Time: 1235.7092024539597
-  Total Nodes: 1480
-  Searched Nodes: 23
-2024-05-21 12:57:21.315 | INFO     | prover_rir.proof_search:search:180 - 
----------------------------------
-
-2024-05-21 13:01:22.823 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
-2024-05-21 13:01:34.820 | INFO     | prover_rir.proof_search:search:179 - Search Result:
-
-Theorem:
-  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
-  File Path: Mathlib/Analysis/Analytic/Basic.lean
-  Full Name: HasFPowerSeriesOnBall.eventually_eq_zero
-
-Status: Status.OPEN
-
-Proof: None
-
-Search Statistics:
-  Planner Time: 57.421665961970575
-  Actor Time: 88.51786818908295
-  Environment Time: 69.66285497619538
-  Total Time: 1259.9801062230254
-  Total Nodes: 525
-  Searched Nodes: 11
-2024-05-21 13:01:34.821 | INFO     | prover_rir.proof_search:search:180 - 
 ---------------------------------
 
