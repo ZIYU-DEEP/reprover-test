@@ -1,0 +1,32 @@
+2024-05-21 20:15:58.387 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 20:15:58.396 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/Bounds/Basic.lean'), full_name='not_bddBelow_iff')
+2024-05-21 20:15:58.452 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 20:15:58.458 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean'), full_name='MeasureTheory.Lp.simpleFunc.toLp_add')
+2024-05-21 20:15:58.491 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 20:15:58.496 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Ordinal/Principal.lean'), full_name='Ordinal.mul_omega')
+2024-05-21 20:15:58.507 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-21 20:15:58.514 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/LinearAlgebra/Reflection.lean'), full_name='Module.preReflection_preReflection')
+2024-05-21 20:17:17.498 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-21 20:17:26.061 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/MeasureTheory/Function/SimpleFuncDenseLp.lean
+  Full Name: MeasureTheory.Lp.simpleFunc.toLp_add
+
+Status: Status.PROVED
+
+Proof:
+  congr
+
+Search Statistics:
+  Planner Time: 12.5163663510466
+  Actor Time: 16.746521121938713
+  Environment Time: 0.04981520492583513
+  Total Time: 29.313120345934294
+  Total Nodes: 7
+  Searched Nodes: 1
+2024-05-21 20:17:26.062 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 20:17:26.074 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Order/ConditionallyCompleteLattice/Basic.lean'), full_name='OrderIso.map_ciSup')

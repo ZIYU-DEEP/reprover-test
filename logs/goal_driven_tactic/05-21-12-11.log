@@ -388,3 +388,90 @@ Search Statistics:
 
 2024-05-21 13:16:51.461 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Topology/Algebra/Group/Basic.lean'), full_name='tendsto_inv')
 2024-05-21 13:29:04.469 | WARNING  | prover_rir.proof_search:search:158 - Dojo crashed with Unexpected EOF when proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/SetTheory/Game/PGame.lean'), full_name='SetTheory.PGame.leftMoves_add_cases')
+2024-05-21 13:29:17.605 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/SetTheory/Game/PGame.lean
+  Full Name: SetTheory.PGame.leftMoves_add_cases
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 289.645730154356
+  Actor Time: 943.25428694539
+  Environment Time: 89.56276717572473
+  Total Time: 1293.0344628649764
+  Total Nodes: 6488
+  Searched Nodes: 42
+2024-05-21 13:29:17.605 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 14:00:47.992 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-21 14:00:59.230 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Analytic/Basic.lean
+  Full Name: HasFPowerSeriesOnBall.eventually_eq_zero
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 221.04540668812115
+  Actor Time: 824.1773481371929
+  Environment Time: 191.6845028026146
+  Total Time: 3059.978989730007
+  Total Nodes: 5138
+  Searched Nodes: 27
+2024-05-21 14:00:59.231 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 14:02:38.408 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-21 14:02:49.706 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/Calculus/FDeriv/Comp.lean
+  Full Name: DifferentiableOn.comp
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 947.2770792238298
+  Actor Time: 1796.802219094825
+  Environment Time: 265.8463158881641
+  Total Time: 3010.602767248987
+  Total Nodes: 18871
+  Searched Nodes: 116
+2024-05-21 14:02:49.707 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-21 14:07:41.681 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-21 14:07:53.001 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Topology/Algebra/Group/Basic.lean
+  Full Name: tendsto_inv
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 444.1263826532522
+  Actor Time: 2229.880546261964
+  Environment Time: 325.42445472831605
+  Total Time: 3000.172075623006
+  Total Nodes: 25654
+  Searched Nodes: 149
+2024-05-21 14:07:53.002 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
