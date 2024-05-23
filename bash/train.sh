@@ -32,3 +32,9 @@ python generator/main.py fit \
 CUDA_VISIBLE_DEVICES=4,5,6,7 python generator/main.py fit \
     --config generator/confs/cli_lean4_random_goal_ckpt_4gpu.yaml
 
+CUDA_VISIBLE_DEVICES=4,5,6,7 python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_goal_driven_tactic_ckpt_4gpu_startover.yaml
+
+
+python generator/main.py fit \
+    --config generator/confs/cli_lean4_random_goal_driven_tactic_ckpt_8gpu.yaml

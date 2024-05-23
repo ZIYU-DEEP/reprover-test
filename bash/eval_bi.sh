@@ -83,21 +83,43 @@ CUDA_VISIBLE_DEVICES=5,6 python prover/evaluate.py \
 # Set the gen_type, goal_ckpt_path, and num_goals
 # The timeout should be set accordingly
 export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_ckpt/reprover-goal/migvv75v/checkpoints/checkpoint-epoch=05-step=41993-loss_val=0.0538-loss_train=0.0217.ckpt'
-export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt"
-export num_sampled_goal='5'
+# export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/abmoy18k/checkpoints/checkpoint-epoch=01-step=100000-loss_val=0.2866-loss_train=0.1084.ckpt"
+# export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/pu57b15p/checkpoints/checkpoint-epoch=61-step=16500-loss_val=0.0186-loss_train=0.0057.ckpt"
+export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/8101fuvc/checkpoints/checkpoint-epoch=07-step=2000-loss_val=1000.0000-loss_train=0.1882.ckpt"
 
-CUDA_VISIBLE_DEVICES=7 python prover_rir/evaluate.py \
+export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_ckpt/reprover-goal/migvv75v/checkpoints/checkpoint-epoch=05-step=41993-loss_val=0.0538-loss_train=0.0217.ckpt'
+export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/reprover-goal-driven-tactic-ckpt/checkpoint-epoch=07-step=2000-loss_val=1000.0000-loss_train=0.1882.ckpt"
+
+
+export goal_driven_tactic_ckpt_path="/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_driven_tactic_ckpt/reprover-goal_driven_tactic/zjnvjqda/checkpoints/checkpoint-epoch=05-step=40000-loss_val=1000.0000-loss_train=0.1496.ckpt"
+export goal_ckpt_path='/home/ubuntu/dojo/github/reprover-test/lightning_logs/goal_ckpt/reprover-goal/migvv75v/checkpoints/checkpoint-epoch=05-step=41993-loss_val=0.0538-loss_train=0.0217.ckpt'
+
+CUDA_VISIBLE_DEVICES=0 python prover_rir/evaluate.py \
     --data-path data/leandojo_benchmark_4/random/ \
     --split test \
     --num-workers 4 \
     --num-gpus 1 \
-    --num-theorems 20 \
+    --num-theorems 80 \
     --ckpt_path $goal_driven_tactic_ckpt_path \
     --goal-ckpt-path $goal_ckpt_path \
-    --num-sampled-goals 5 \
+    --num-sampled-goals 2 \
     --gen-type goal_driven_tactic \
-    --timeout 3000 \
+    --timeout 2400 \
+    --start-ind 20 
+
+CUDA_VISIBLE_DEVICES=4,5 python prover_rir/evaluate.py \
+    --data-path data/leandojo_benchmark_4/random/ \
+    --split test \
+    --num-workers 16 \
+    --num-gpus 2 \
+    --num-theorems 200 \
+    --ckpt_path $goal_driven_tactic_ckpt_path \
+    --goal-ckpt-path $goal_ckpt_path \
+    --num-sampled-goals 2 \
+    --gen-type goal_driven_tactic \
+    --timeout 1200 \
     --start-ind 0
+
 
 CUDA_VISIBLE_DEVICES=5,6 python prover_rir/evaluate.py \
     --data-path data/leandojo_benchmark_4/random/ \
