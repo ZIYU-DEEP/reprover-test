@@ -1,0 +1,13 @@
+Proved in 05-23-06-19_proved_names.log but not in reprover_minif2f_test_proved_names.log:
+aime_1990_p4
+amc12a_2002_p6
+amc12a_2021_p3
+induction_11div10tonmn1ton
+mathd_algebra_137
+mathd_algebra_484
+mathd_algebra_80
+mathd_numbertheory_100
+
+Proved in reprover_minif2f_test_proved_names.log but not in 05-23-06-19_proved_names.log:
+mathd_algebra_129
+mathd_numbertheory_150
