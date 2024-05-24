@@ -1,0 +1,58 @@
+2024-05-24 02:13:53.053 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-24 02:13:53.058 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/MeasureTheory/MeasurableSpace/Basic.lean'), full_name='measurable_of_measurable_on_compl_finite')
+2024-05-24 02:13:53.108 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-24 02:13:53.112 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/CategoryTheory/Limits/Shapes/FunctorToTypes.lean'), full_name='CategoryTheory.FunctorToTypes.binaryProductIso_inv_comp_fst_apply')
+2024-05-24 02:13:53.243 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-24 02:13:53.248 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/FieldTheory/Adjoin.lean'), full_name='IntermediateField.adjoin_eq_top_of_adjoin_eq_top')
+2024-05-24 02:13:53.618 | INFO     | prover_rir.proof_search:__init__:113 - Using gen_type: goal_driven_tactic.
+2024-05-24 02:13:53.625 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/CategoryTheory/Limits/Opposites.lean'), full_name='CategoryTheory.Limits.PullbackCone.op_inl')
+2024-05-24 02:14:58.803 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-24 02:15:07.809 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/CategoryTheory/Limits/Opposites.lean
+  Full Name: CategoryTheory.Limits.PullbackCone.op_inl
+
+Status: Status.PROVED
+
+Proof:
+  aesop_cat
+
+Search Statistics:
+  Planner Time: 2.9573712600395083
+  Actor Time: 6.405483415117487
+  Environment Time: 0.08854037499986589
+  Total Time: 9.451715450035408
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-24 02:15:07.815 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 02:15:07.828 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean'), full_name='ContinuousAffineMap.norm_image_zero_le')
+2024-05-24 02:18:12.369 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-24 02:18:21.591 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7')
+  File Path: Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean
+  Full Name: ContinuousAffineMap.norm_image_zero_le
+
+Status: Status.PROVED
+
+Proof:
+  rw [ContinuousAffineMap.norm_def]
+  simp
+
+Search Statistics:
+  Planner Time: 57.66554988315329
+  Actor Time: 87.52736175386235
+  Environment Time: 10.171856897883117
+  Total Time: 155.39013235410675
+  Total Nodes: 829
+  Searched Nodes: 5
+2024-05-24 02:18:21.591 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 02:18:21.603 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/leanprover-community/mathlib4', commit='fe4454af900584467d21f4fd4fe951d29d9332a7'), file_path=PosixPath('Mathlib/Analysis/Convex/Between.lean'), full_name='Wbtw.left_ne_right_of_ne_right')
+2024-05-24 02:19:01.898 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
