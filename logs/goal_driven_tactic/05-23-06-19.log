@@ -5570,3 +5570,139 @@ Search Statistics:
 ---------------------------------
 
 2024-05-24 05:52:15.212 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00'), file_path=PosixPath('MiniF2F/Test.lean'), full_name='algebra_ineq_nto1onlt2m1on')
+2024-05-24 06:04:39.389 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-24 06:04:44.326 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: mathd_numbertheory_150
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 428.51904673478566
+  Actor Time: 2324.0561667853035
+  Environment Time: 448.7050426832866
+  Total Time: 3202.1952420000453
+  Total Nodes: 27027
+  Searched Nodes: 185
+2024-05-24 06:04:44.331 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 06:04:44.335 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00'), file_path=PosixPath('MiniF2F/Test.lean'), full_name='mathd_numbertheory_559')
+2024-05-24 06:05:08.863 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-24 06:05:13.477 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: mathd_numbertheory_559
+
+Status: Status.PROVED
+
+Proof:
+  omega
+
+Search Statistics:
+  Planner Time: 1.5225456159096211
+  Actor Time: 2.351883864030242
+  Environment Time: 0.5004416599404067
+  Total Time: 4.375206572934985
+  Total Nodes: 3
+  Searched Nodes: 1
+2024-05-24 06:05:13.478 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 06:05:13.483 | INFO     | prover_rir.proof_search:search:119 - Proving Theorem(repo=LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00'), file_path=PosixPath('MiniF2F/Test.lean'), full_name='mathd_numbertheory_175')
+2024-05-24 06:05:39.633 | INFO     | prover_rir.proof_search:_best_first_search:213 - Found a proof!
+2024-05-24 06:05:44.933 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: mathd_numbertheory_175
+
+Status: Status.PROVED
+
+Proof:
+  norm_num
+
+Search Statistics:
+  Planner Time: 0.40510650002397597
+  Actor Time: 1.0274882311932743
+  Environment Time: 0.008458005031570792
+  Total Time: 1.4412660440430045
+  Total Nodes: 2
+  Searched Nodes: 1
+2024-05-24 06:05:44.934 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 06:27:06.707 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-24 06:27:11.490 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: amc12_2000_p12
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 170.20357789867558
+  Actor Time: 1546.8385571867693
+  Environment Time: 873.5930231167004
+  Total Time: 3259.9909688800108
+  Total Nodes: 12030
+  Searched Nodes: 81
+2024-05-24 06:27:11.491 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 06:45:04.771 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-24 06:45:09.492 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: induction_prod1p1onk3le3m1onn
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 63.469130793819204
+  Actor Time: 1061.0651790243573
+  Environment Time: 455.19195853639394
+  Total Time: 3259.995363763999
+  Total Nodes: 7855
+  Searched Nodes: 50
+2024-05-24 06:45:09.493 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
+2024-05-24 06:47:00.135 | INFO     | prover_rir.proof_search:_best_first_search:205 - Search timed out.
+2024-05-24 06:47:05.259 | INFO     | prover_rir.proof_search:search:179 - Search Result:
+
+Theorem:
+  Repository: LeanGitRepo(url='https://github.com/yangky11/miniF2F-lean4', commit='9e445f5435407f014b88b44a98436d50dd7abd00')
+  File Path: MiniF2F/Test.lean
+  Full Name: algebra_ineq_nto1onlt2m1on
+
+Status: Status.OPEN
+
+Proof: None
+
+Search Statistics:
+  Planner Time: 21.619574775220826
+  Actor Time: 231.52758777234703
+  Environment Time: 1441.7723446646705
+  Total Time: 3259.9938529231586
+  Total Nodes: 1735
+  Searched Nodes: 12
+2024-05-24 06:47:05.263 | INFO     | prover_rir.proof_search:search:180 - 
+---------------------------------
+
